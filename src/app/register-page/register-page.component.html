@@ -1,0 +1,24 @@
+<div class="container">
+
+<form autocomplete="off" novalidate class="form-signin">
+
+  <fieldset>
+    <h2 class="form-signin-heading">Register</h2>
+    <div class="form-field">
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input type="email" id="inputEmail" name="email" [(ngModel)]="email" class="form-control" placeholder="Email address" required autofocus>
+    </div>
+    <div class="form-field">
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input type="password" id="inputPassword" name="password" [(ngModel)]="password" class="form-control" placeholder="Password" required>
+    </div>
+    <div class="form-field">
+      <label for="inputPassword" class="sr-only">Confirm password</label>
+      <input type="password" id="confirmPassword" name="password" [(ngModel)]="confirmPassword" class="form-control" placeholder="Confirm Password" required>
+    </div>
+  </fieldset>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="signUp()" [disabled]="!isPasswordMatch()">Create User</button>
+
+</form>
+</div>

@@ -11,6 +11,8 @@ import { AuthService } from './providers/auth.service';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AuthGuardService } from './providers/auth-guard.service';
+
 
 export const firebaseConfig = {
     apiKey: 'AIzaSyBw7XI7wxhmhIIZDdeeSlQCNSpp1RqGhPg',
@@ -22,8 +24,10 @@ export const firebaseConfig = {
 };
 
 const routes: Routes = [
-  {path: '', component: HomePageComponent},
-  {path: 'login', component: LoginPageComponent}
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'login', component: LoginPageComponent},
+  {path: 'register', component: RegisterPageComponent},
+  { path: 'home', component: HomePageComponent, canActivate: [AuthGuardService] }
 ]
 
 @NgModule({
@@ -42,7 +46,7 @@ const routes: Routes = [
     AngularFireAuthModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
