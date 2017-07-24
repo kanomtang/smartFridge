@@ -1,5 +1,10 @@
 export class ProductItem {
 
-  id: number;
-  name: string;
+  CreatedDate: string;
+  Expirydate: string;
+  InUse: boolean;
+  Price: number;
+  ProductID: number;
+  ProductName: string;
+
 }

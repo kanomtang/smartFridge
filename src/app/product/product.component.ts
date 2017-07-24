@@ -14,6 +14,8 @@ export class ProductComponent {
   items: FirebaseListObservable<any[]>;
   item: FirebaseObjectObservable<any>;
   isEdit = true;
+  isAdd = false;
+  model=  new ProductItem();
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
@@ -24,8 +26,8 @@ export class ProductComponent {
     // delete single item
     // the first slot is path or child
     // the second is key
-    const pathFirbase = 'Item/' + keyparam;
-    this.af.object(pathFirbase)
+    const pathFirebase = 'ProductInfo/' + keyparam;
+    this.af.object(pathFirebase)
       .remove()
       .then(() => alert('Successful for deleting item key'));
 
@@ -36,20 +38,17 @@ export class ProductComponent {
     this.onEdit();
   }
 
-  addItem(key: string): void {
-    //  อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
-     // this.items.push({
-     //   'CreatedDate': '1/07/2017',
-     //   'ExpiryDate': '19/07/2017',
-     //   'InUse': 'Active',
-     //   'Price': 20,
-     //   'ProductID': 'ISR-1',
-     //   'ProductName': 'Testo',
-     //   'QRCode': 'dfdasfdsfdsf'
-     // })
-     //   .then(
-     //     () => alert('Successful for adding new item')
-     //   );
+  addItem(): void {
+    //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
+    this.items.push({
+      'InUse': this.model.InUse = true,
+      'Price': this.model.Price,
+      'ProductID': this.model.ProductID,
+      'ProductName': this.model.ProductName
+    })
+      .then(
+        () => alert('Successful for adding new item')
+      );
     this.onEdit();
   }
 
@@ -62,5 +61,22 @@ export class ProductComponent {
       this.isEdit = true;
     }
   }
+
+  onAdding(): void {
+    // this method for enable the user to adding the new product
+    if (this.isAdd === true) {
+      this.isAdd = false;
+    } else {
+      this.isAdd = true;
+    }
+  }
+  testCreate(): void {
+    this.items.push({'ProductName': this.model.ProductName, 'Price': this.model.Price})
+      .then(
+        () => alert('Success for adding new product')
+      );
+    this.onAdding();
+  }
+
 
 }

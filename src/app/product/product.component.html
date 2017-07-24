@@ -1,4 +1,41 @@
-<h1>{{title}}</h1>
+<h1>{{title}} <button type="button" class="btn btn-success" (click)="onAdding()">Create new product</button></h1>
+<div [hidden]="!isAdd" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Adding new product</h1>
+      <form >
+
+        <div class="form-group">
+          <label for="ProductID">ID</label>
+          <input type="text"  id="ProductID" name="ProductID"
+                 [(ngModel)]="model.ProductID" class="form-group">
+
+        </div>
+
+
+        <div class="form-group">
+          <label for="ProductName">ID</label>
+          <input type="text"  id="ProductName" name="ProductName"
+                 [(ngModel)]="model.ProductName" class="form-group">
+
+        </div>
+
+        <div class="form-group">
+          <label for="Price">Price</label>
+          <input type="text"  id="Price" name="Price"
+                 [(ngModel)]="model.Price" class="form-group">
+        </div>
+
+        <div>
+          <button class="btn btn-success" (click)="addItem()" > Add </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+
 <ul *ngFor="let item of items | async">
 
   {{ item.ProductName }}
