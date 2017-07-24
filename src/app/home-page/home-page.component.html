@@ -1,6 +1,14 @@
 <div class="container">
   <div class="jumbotron">
-    <h1>Welcome</h1>
+
+    <h1> {{title}}</h1>
+
+    <button (click)="onSelectTopic(1)">Product</button>
+    <app-product *ngIf="topicValue == '1'">Preparing product information</app-product>
+    <button (click)="onSelectTopic(2)">Home User</button>
+    <app-user-component *ngIf="topicValue =='2'"></app-user-component>
+
+
     <button class="btn btn-default" (click)="logout()">Logout</button>
   </div>
 </div>

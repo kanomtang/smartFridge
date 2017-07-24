@@ -12,22 +12,23 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthGuardService } from './providers/auth-guard.service';
-
+import { UserComponentComponent } from './user-component/user-component.component';
+import {ProductComponent} from './product/product.component'
 
 export const firebaseConfig = {
-    apiKey: 'AIzaSyBw7XI7wxhmhIIZDdeeSlQCNSpp1RqGhPg',
-    authDomain: 'smartfridge-40cfd.firebaseapp.com',
-    databaseURL: 'https://smartfridge-40cfd.firebaseio.com',
-    projectId: 'smartfridge-40cfd',
-    storageBucket: 'smartfridge-40cfd.appspot.com',
-    messagingSenderId: '1051575034709'
+  apiKey: 'AIzaSyCFXny8pflQwLu9AyQu8ve9xI6qA9KR7PM',
+  authDomain: 'iotapplication-7cf10.firebaseapp.com',
+  databaseURL: 'https://iotapplication-7cf10.firebaseio.com',
+  projectId: 'iotapplication-7cf10',
+  storageBucket: 'iotapplication-7cf10.appspot.com',
+  messagingSenderId: '33890290341'
 };
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginPageComponent},
   {path: 'register', component: RegisterPageComponent},
-  { path: 'home', component: HomePageComponent, canActivate: [AuthGuardService] }
+  {path: 'home', component: HomePageComponent, canActivate: [AuthGuardService]}
 ]
 
 @NgModule({
@@ -35,7 +36,9 @@ const routes: Routes = [
     AppComponent,
     LoginPageComponent,
     HomePageComponent,
-    RegisterPageComponent
+    RegisterPageComponent,
+    UserComponentComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
