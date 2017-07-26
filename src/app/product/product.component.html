@@ -37,6 +37,7 @@
   <div>
     <label >{{ item.ProductName}}</label>
     <label >{{ item.Price}}</label>
+    <label>{{item.InUse}}</label>
 
   </div>
 
@@ -66,6 +67,12 @@
               <label for="Price">Price</label>
               <input type="text"  id="PriceProduct" name="Price"
                      [(ngModel)]="model.Price" class="form-group">
+            </div>
+
+            <div class="form-group">
+              <label for="InUse">Status</label>
+              <input type="text"  id="InUse" name="InUse"
+                     [(ngModel)]="model.InUse" class="form-group">
             </div>
 
             <div>

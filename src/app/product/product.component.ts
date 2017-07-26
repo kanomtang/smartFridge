@@ -32,7 +32,7 @@ export class ProductComponent {
     const pathFirebase = 'ProductInfo/' + keyparam;
     this.af.object(pathFirebase)
       .remove()
-      .then(() => alert('Successful for deleting item key'));
+      .then(() => alert('Successful for deleting item '));
 
   }
 
@@ -50,7 +50,8 @@ export class ProductComponent {
       .update({'Price': this.model.Price,
 
         'ProductName': this.model.ProductName,
-        'CreatedDate': this.model.CreatedDate = this.datetime} )
+        'LastUpdate' : this.model.LastUpdate = this.datetime,
+        'InUse': this.model.InUse} )
       .then(() => alert('Successful for Updating '));
     this.editKey = null;
   }
@@ -69,7 +70,8 @@ export class ProductComponent {
       'Price': this.model.Price,
 
       'ProductName': this.model.ProductName,
-      'CreatedDate': this.model.CreatedDate = this.datetime
+      'CreatedDate': this.model.CreatedDate = this.datetime,
+      'LastUpdate' : this.model.LastUpdate = this.datetime
     })
       .then(
         () => alert('Successful for adding new item')
@@ -100,13 +102,7 @@ export class ProductComponent {
     }
   }
 
-  testCreate(): void {
-    this.items.push({'ProductName': this.model.ProductName, 'Price': this.model.Price})
-      .then(
-        () => alert('Success for adding new product')
-      );
-    this.onAdding();
-  }
+
 
   openToEdit(keyparam: string): void {
     this.onEdit();
