@@ -1,8 +1,12 @@
 export class User {
 
-  id: number;
-  name: string;
-  address: string;
-  telephoneNumber: number;
+
+  CustomerFName: string;
+  CustomerLName: string;
+  City: string;
+
+  Province: string;
+
+
 
 }

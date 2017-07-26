@@ -1,11 +1,120 @@
-<h1>{{title}}</h1>
-<ul *ngFor="let SingleUser of users | async">
+<h1>{{title}} <button type="button" class="btn btn-success" (click)="onAdding()">Create new product</button></h1>
+<div [hidden]="!isAdd" class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Adding new customer</h1>
+      <form >
 
-  {{ SingleUser.CustomerID }}
 
-  <button [disabled]="!isEdit" type="button" class="btn btn-warning" >Edit</button>
-  <button [disabled]="isEdit" type="button" class="btn btn-success" >Save</button>
-  <button type="button" class="btn btn-danger" (click)="deleteItem(item.$key)">Delete</button>
+
+
+        <div class="form-group">
+          <label for="CustomerFName">First Name</label>
+          <input type="text"  id="CustomerFName" name="CustomerFName"
+                 [(ngModel)]="model.CustomerFName" class="form-group">
+
+        </div>
+
+
+        <div class="form-group">
+          <label for="CustomerFName">Last Name</label>
+          <input type="text"  id="CustomerLName" name="CustomerLName"
+                 [(ngModel)]="model.CustomerLName" class="form-group">
+
+        </div>
+        <label >Address</label>
+        <div class="form-group">
+          <label for="City">City</label>
+          <input type="text"  id="City" name="City"
+                 [(ngModel)]="model.City" class="form-group">
+
+
+          <label for="Province">Province</label>
+          <input type="text"  id="Province" name="Province"
+                 [(ngModel)]="model.Province" class="form-group">
+
+
+
+        </div>
+
+        <div>
+          <button class="btn btn-success" (click)="addItem()" > Add </button>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<label >First name</label>
+<label > Last name</label>
+<label >City</label>
+<label >Province</label>
+<ul *ngFor="let SingleUser  of users | async">
+  <div>
+    <label >{{ SingleUser.CustomerFName}}</label>
+    <label >{{ SingleUser.CustomerLname }}</label>
+    <label >{{ SingleUser.City }}</label>
+    <label >{{ SingleUser.Province }}</label>
+  </div>
+
+
+  <button [disabled]="!isEdit" type="button" class="btn btn-warning" (click)="openToEdit(SingleUser.$key)">Edit</button>
+  <button type="button" class="btn btn-danger" (click)="deleteItem(SingleUser.$key)">Delete</button>
+  <div *ngIf="editKey == SingleUser.$key">
+
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1>Adding new customer</h1>
+          <form >
+
+
+
+
+            <div class="form-group">
+              <label for="CustomerFNamee">First Name</label>
+              <input type="text"  id="CustomerFNamee" name="CustomerFNamee"
+                     [(ngModel)]="model.CustomerFName" class="form-group">
+
+            </div>
+
+
+            <div class="form-group">
+              <label for="CustomerFNamee">Last Name</label>
+              <input type="text"  id="CustomerLNamee" name="CustomerLNamee"
+                     [(ngModel)]="model.CustomerLName" class="form-group">
+
+            </div>
+            <label >Address</label>
+            <div class="form-group">
+              <label for="Cityy">City</label>
+              <input type="text"  id="Cityy" name="Cityy"
+                     [(ngModel)]="model.City" class="form-group">
+
+
+              <label for="Provincee">Province</label>
+              <input type="text"  id="Provincee" name="Provincee"
+                     [(ngModel)]="model.Province" class="form-group">
+
+
+
+            </div>
+
+            <div>
+              <button class="btn btn-success" (click)="addItem()" > Add </button>
+
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </ul>
 
 

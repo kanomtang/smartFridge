@@ -4,7 +4,7 @@ export class ProductItem {
   Expirydate: string;
   InUse: boolean;
   Price: number;
-  ProductID: number;
+
   ProductName: string;
 
 }

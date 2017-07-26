@@ -5,16 +5,11 @@
       <h1>Adding new product</h1>
       <form >
 
-        <div class="form-group">
-          <label for="ProductID">ID</label>
-          <input type="text"  id="ProductID" name="ProductID"
-                 [(ngModel)]="model.ProductID" class="form-group">
 
-        </div>
 
 
         <div class="form-group">
-          <label for="ProductName">ID</label>
+          <label for="ProductName">Name</label>
           <input type="text"  id="ProductName" name="ProductName"
                  [(ngModel)]="model.ProductName" class="form-group">
 
@@ -35,14 +30,60 @@
   </div>
 
 </div>
-
+<label >Product Name</label>
+<label >Price</label>
 <ul *ngFor="let item of items | async">
 
-  {{ item.ProductName }}
+  <div>
+    <label >{{ item.ProductName}}</label>
+    <label >{{ item.Price}}</label>
 
-  <button [disabled]="!isEdit" type="button" class="btn btn-warning" >Edit</button>
-  <button [disabled]="isEdit" type="button" class="btn btn-success" >Save</button>
+  </div>
+
+  <button [disabled]="!isEdit" type="button" class="btn btn-warning" (click)="openToEdit(item.$key)">Edit</button>
   <button type="button" class="btn btn-danger" (click)="deleteItem(item.$key)">Delete</button>
+  <div *ngIf="editKey == item.$key">
+
+
+
+    <div class="container">
+      <div class="row">
+        <div lass="col-md-12">
+          <h1>YEAH</h1>
+          <form >
+
+
+
+
+            <div class="form-group">
+              <label for="ProductName">Name</label>
+              <input type="text"  id="NameProduct" name="ProductName"
+                     [(ngModel)]="model.ProductName" class="form-group">
+
+            </div>
+
+            <div class="form-group">
+              <label for="Price">Price</label>
+              <input type="text"  id="PriceProduct" name="Price"
+                     [(ngModel)]="model.Price" class="form-group">
+            </div>
+
+            <div>
+
+              <button  type="button"
+                       class="btn btn-success" (click)="updateItem(item.$key)" >
+                Save</button>
+            </div>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </ul>
 
 

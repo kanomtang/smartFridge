@@ -1,7 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {ProductItem} from '../shared/ProductItem';
-
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -15,7 +15,10 @@ export class ProductComponent {
   item: FirebaseObjectObservable<any>;
   isEdit = true;
   isAdd = false;
-  model=  new ProductItem();
+  model = new ProductItem();
+  currentdate = new Date();
+  datetime: string;
+  editKey: string;
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
@@ -33,23 +36,49 @@ export class ProductComponent {
 
   }
 
-  updateItem(key: string): void {
+  updateItem(keyparam: string): void {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
     this.onEdit();
+    this.datetime = this.currentdate.getDate() + '/'
+      + (this.currentdate.getMonth() + 1 ) + '/'
+      + this.currentdate.getFullYear() + ' @ '
+      + this.currentdate.getHours() + ':'
+      + this.currentdate.getMinutes() + ':'
+      + this.currentdate.getSeconds();
+    const pathFirebase = 'ProductInfo/' + keyparam;
+    this.af.object(pathFirebase)
+      .update({'Price': this.model.Price,
+
+        'ProductName': this.model.ProductName,
+        'CreatedDate': this.model.CreatedDate = this.datetime} )
+      .then(() => alert('Successful for Updating '));
+    this.editKey = null;
   }
 
   addItem(): void {
     //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
+    this.datetime = this.currentdate.getDate() + '/'
+      + (this.currentdate.getMonth() + 1 ) + '/'
+      + this.currentdate.getFullYear() + ' @ '
+      + this.currentdate.getHours() + ':'
+      + this.currentdate.getMinutes() + ':'
+      + this.currentdate.getSeconds();
+
     this.items.push({
       'InUse': this.model.InUse = true,
       'Price': this.model.Price,
-      'ProductID': this.model.ProductID,
-      'ProductName': this.model.ProductName
+
+      'ProductName': this.model.ProductName,
+      'CreatedDate': this.model.CreatedDate = this.datetime
     })
       .then(
         () => alert('Successful for adding new item')
       );
-    this.onEdit();
+    this.model.InUse= null;
+    this.model.ProductName = null;
+    this.model.Price = null;
+    this.model.CreatedDate= null;
+    this.onAdding();
   }
 
 
@@ -70,12 +99,18 @@ export class ProductComponent {
       this.isAdd = true;
     }
   }
+
   testCreate(): void {
     this.items.push({'ProductName': this.model.ProductName, 'Price': this.model.Price})
       .then(
         () => alert('Success for adding new product')
       );
     this.onAdding();
+  }
+
+  openToEdit(keyparam: string): void {
+    this.onEdit();
+    this.editKey = keyparam;
   }
 
 
