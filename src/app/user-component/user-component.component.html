@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-12">
       <h1>Adding new customer</h1>
-      <form >
+      <form #addForm="ngForm" >
 
 
 
@@ -38,7 +38,8 @@
         </div>
 
         <div>
-          <button class="btn btn-success" (click)="addItem()" > Add </button>
+          <button class="btn btn-success" (click)="addItem()"
+                  [disabled]="!addForm.form.valid"> Add </button>
 
         </div>
       </form>
@@ -69,7 +70,7 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Adding new customer</h1>
-          <form >
+          <form #editForm="ngForm">
 
 
 
@@ -104,7 +105,8 @@
             </div>
 
             <div>
-              <button class="btn btn-success" (click)="addItem()" > Add </button>
+              <button class="btn btn-success" (click)="addItem()"
+                      [disabled]="!editForm.form.valid"> Add </button>
 
             </div>
           </form>
