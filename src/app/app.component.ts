@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, NgModule} from '@angular/core';
+import {Router, RouterModule} from '@angular/router';
 import { AuthService } from './providers/auth.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from './providers/auth.service';
 })
 export class AppComponent {
   private isLoggedIn: Boolean;
-  constructor(public authService: AuthService, private router: Router){
+  constructor(public authService: AuthService, private router: Router) {
     this.authService.user.subscribe(
       (auth) => {
         if (auth == null) {

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgModule, OnInit} from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService} from '../providers/auth.service';
 
@@ -6,6 +7,10 @@ import { AuthService} from '../providers/auth.service';
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
+})
+@NgModule({
+  imports: [ FormsModule ],
+  providers: [ AuthService ]
 })
 export class LoginPageComponent implements OnInit {
   email: string;
@@ -15,11 +20,6 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {
     console.log('email' + this.email);
-  }
-
-  signup() {
-    this.authService.signup(this.email, this.password);
-    this.email = this.password = '';
   }
   login() {
     this.authService.login(this.email, this.password);

@@ -32,29 +32,24 @@ export class AuthService {
 
 
   login(email: string, password: string) {
-    this.firebaseAuth
-      .auth
-      .signInWithEmailAndPassword(email, password)
-      .then(value => {
-        console.log('Nice, it worked!');
-        console.log(this.user);
-        this.router.navigate(['home']);
-      })
-      .catch(err => {
-        console.log('Something went wrong:', err.message);
-      });
-    // firebase.auth().signInWithEmailAndPassword(email, password)
-    //   .catch(function(error) {
-    //     // Handle Errors here.
-    //     const errorCode = error.status;
-    //     const errorMessage = error.message;
-    //     if (errorCode === 'auth/wrong-password') {
-    //       alert('Wrong password.');
-    //     } else {
-    //       alert(errorMessage);
-    //     }
-    //     console.log(error);
-    //   });
+    if (email && password) {
+      this.firebaseAuth
+        .auth
+        .signInWithEmailAndPassword(email, password)
+        .then(value => {
+          console.log('Nice, it worked!');
+          console.log(this.user);
+          this.router.navigate(['home']);
+        })
+        .catch(err => {
+          console.log('Something went wrong:', err.message);
+          if (err.message) {
+            alert(err.message);
+          }
+        });
+    }else {
+      alert('Email or Password is missing.');
+    }
   }
 
   logout() {
