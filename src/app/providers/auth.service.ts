@@ -24,9 +24,13 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value);
+        this.router.navigate(['login']);
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
+        if (err.message) {
+          alert(err.message);
+        }
       });
   }
 

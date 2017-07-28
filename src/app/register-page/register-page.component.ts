@@ -19,10 +19,17 @@ export class RegisterPageComponent implements OnInit {
   isPasswordMatch() {
       return this.password === this.confirmPassword;
     }
+    isEmpty() {
+      return(this.email && this.password && this.confirmPassword);
+    }
 
     signUp() {
-      this.authService.signup(this.email, this.password);
-      this.router.navigate(['login']);
+      if (this.isPasswordMatch()) {
+        this.authService.signup(this.email, this.password);
+
+      }else {
+        alert('password is not match');
+      }
         // .subscribe(
         //   () => {
         //     alert('User created successfully !');
