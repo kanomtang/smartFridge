@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9feb62be-01b8-4527-84ed-bfb18c8e8af3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/login-page/login-page.component.html" afterPath="$PROJECT_DIR$/src/app/login-page/login-page.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/providers/auth.service.ts" afterPath="$PROJECT_DIR$/src/app/providers/auth.service.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/register-page/register-page.component.html" afterPath="$PROJECT_DIR$/src/app/register-page/register-page.component.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/register-page/register-page.component.ts" afterPath="$PROJECT_DIR$/src/app/register-page/register-page.component.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -783,7 +779,7 @@
       <workItem from="1501000807613" duration="4473000" />
       <workItem from="1501130155245" duration="1293000" />
       <workItem from="1501173277870" duration="8332000" />
-      <workItem from="1501214582855" duration="1632000" />
+      <workItem from="1501214582855" duration="1694000" />
     </task>
     <task id="LOCAL-00001" summary="first commit&#10;import bootstrap jquery&#10;create angularfire2 component (not finish)">
       <created>1500225491003</created>
@@ -799,14 +795,21 @@
       <option name="project" value="LOCAL" />
       <updated>1500317400614</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add alert error msg on register page">
+      <created>1501217017654</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1501217017654</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56575000" />
+    <option name="totallyTimeSpent" value="56637000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="53" y="4" width="1861" height="1047" extended-state="0" />
+    <frame x="53" y="4" width="1861" height="1047" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -876,7 +879,8 @@
     <MESSAGE value="first commit&#10;import bootstrap jquery&#10;create angularfire2 component (not finish)" />
     <MESSAGE value="login page" />
     <MESSAGE value="auth system can alert error msg" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth system can alert error msg" />
+    <MESSAGE value="add alert error msg on register page" />
+    <option name="LAST_COMMIT_MESSAGE" value="add alert error msg on register page" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
