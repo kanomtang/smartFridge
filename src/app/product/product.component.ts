@@ -19,29 +19,30 @@ export class ProductComponent {
   currentdate = new Date();
   datetime: string;
   editKey: string;
+  deleteKey: string;
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
 
   }
 
-  deleteItem(keyparam: string): string {
+  deleteItem(): string {
     // delete single item
     // the first slot is path or child
     // the second is key
     try{
-      const pathFirebase = 'ProductInfo/' + keyparam;
+      const pathFirebase = 'ProductInfo/' + this.deleteKey;
       this.af.object(pathFirebase)
         .remove()
         .then(() => alert('Successful for deleting item '));
 
-      return keyparam + 'has been deleted'
+      return this.deleteKey + 'has been deleted';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
   }
 
-  updateItem(keyparam: string): string {
+  updateItem(): string {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
     try{
       this.onEdit();
@@ -51,19 +52,19 @@ export class ProductComponent {
         + this.currentdate.getHours() + ':'
         + this.currentdate.getMinutes() + ':'
         + this.currentdate.getSeconds();
-      const pathFirebase = 'ProductInfo/' + keyparam;
+      const pathFirebase = 'ProductInfo/' + this.editKey;
       this.af.object(pathFirebase)
         .update({'Price': this.model.Price,
 
           'ProductName': this.model.ProductName,
           'LastUpdate' : this.model.LastUpdate = this.datetime,
-          'InUse': this.model.InUse} )
+          'InUse': true} )
         .then(() => alert('Successful for Updating '));
       this.editKey = null;
 
-      return keyparam + 'has been update'
+      return this.model.ProductName + 'has been update';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
   }
 
@@ -88,14 +89,14 @@ export class ProductComponent {
         .then(
           () => alert('Successful for adding new item')
         );
-      this.model.InUse= null;
+      this.model.InUse = null;
       this.model.ProductName = null;
       this.model.Price = null;
-      this.model.CreatedDate= null;
+      this.model.CreatedDate = null;
       this.onAdding();
-      return   'item has been added'
+      return   'item has been added';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
   }
 
@@ -106,9 +107,9 @@ export class ProductComponent {
       this.isEdit = false;
     } else {
       this.isEdit = true;
-      return 'isEdit = true'
+      return 'isEdit = true';
     }
-    return 'isEdit = false'
+    return 'isEdit = false';
   }
 
   onAdding(): string {
@@ -117,9 +118,9 @@ export class ProductComponent {
       this.isAdd = false;
     } else {
       this.isAdd = true;
-      return 'isAdd = true'
+      return 'isAdd = true';
     }
-    return 'isAdd = false'
+    return 'isAdd = false';
   }
 
 
@@ -131,6 +132,14 @@ export class ProductComponent {
     return 'editKey=' + keyparam;
   }
 
+  keyToEdit(keyparam: string, item: ProductItem) {
+    this.editKey = keyparam;
+    this.model = Object.assign({}, item);
+    console.log(this.model);
+  }
 
+  keyToDelete(keyparam: string) {
+    this.deleteKey = keyparam;
+  }
 
 }
