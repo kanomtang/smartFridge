@@ -1,37 +1,3 @@
-<h2>{{title}} <button type="button" class="btn btn-success" (click)="onAdding()">Create new product</button></h2>
-<div [hidden]="!isAdd" class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h4>Adding new product</h4>
-      <form #addForm="ngForm" >
-
-
-
-
-        <div class="form-group">
-          <label for="ProductName">Name</label>
-          <input type="text"  id="ProductName" name="ProductName"
-                 [(ngModel)]="model.ProductName" class="form-group">
-
-        </div>
-
-        <div class="form-group">
-          <label for="Price">Price</label>
-          <input type="text"  id="Price" name="Price"
-                 [(ngModel)]="model.Price" class="form-group">
-        </div>
-
-        <div>
-          <button class="btn btn-success" (click)="addItem()"
-                  [disabled]="!addForm.form.valid"> Add </button>
-
-        </div>
-      </form>
-    </div>
-  </div>
-
-</div>
-
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -41,7 +7,7 @@
   <div class="row">
 
 
-    <div class="col-md-12">
+    <div class="productTable">
       <!--<h4>Bootstrap Snipp for Datatable</h4>-->
       <div class="table-responsive">
 
@@ -49,12 +15,17 @@
         <table id="mytable" class="table table-bordred table-striped">
 
           <thead>
-          <th>Product Name</th>
+          <th style="padding-left: 10px">Name</th>
           <th>Price</th>
           <th>InUse</th>
 
           <th>Edit</th>
           <th>Delete</th>
+          <th  style="text-align: center">
+            <p data-placement="top" data-toggle="tooltip" title="Add new product"><button class="btn btn-default btn-xs" data-title="Edit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></p>
+          </th>
+
+
           </thead>
           <tbody>
 
@@ -69,7 +40,9 @@
           </tbody>
         </table>
 
-
+        <!--<div class="addProduct">-->
+        <!--<p data-placement="top" data-toggle="tooltip" title="Add"><button class="btn btn-default .btn-sm " data-title="Edit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></p>-->
+        <!--</div>-->
 
       </div>
 
@@ -121,6 +94,34 @@
       <div class="modal-footer ">
         <button type="button" class="btn btn-success" data-dismiss="modal" (click)="deleteItem()"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="AddHeading">Add new product</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="ProductName">Name</label>
+          <input class="form-control " type="text" [(ngModel)]="model.ProductName">
+        </div>
+        <div class="form-group">
+          <label for="Price">Price</label>
+          <input class="form-control " type="text" [(ngModel)]="model.Price">
+        </div>
+
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addItem()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
       </div>
     </div>
     <!-- /.modal-content -->
