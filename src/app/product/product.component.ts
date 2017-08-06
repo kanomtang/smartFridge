@@ -1,7 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {ProductItem} from '../shared/ProductItem';
-import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-product',
@@ -16,7 +15,7 @@ export class ProductComponent {
   isEdit = true;
   isAdd = false;
   model = new ProductItem();
-  currentdate = new Date();
+  currentDate = new Date();
   datetime: string;
   editKey: string;
   deleteKey: string;
@@ -30,7 +29,7 @@ export class ProductComponent {
     // delete single item
     // the first slot is path or child
     // the second is key
-    try{
+    try {
       const pathFirebase = 'ProductInfo/' + this.deleteKey;
       this.af.object(pathFirebase)
         .remove()
@@ -44,14 +43,14 @@ export class ProductComponent {
 
   updateItem(): string {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
-    try{
+    try {
       this.onEdit();
-      this.datetime = this.currentdate.getDate() + '/'
-        + (this.currentdate.getMonth() + 1 ) + '/'
-        + this.currentdate.getFullYear() + ' @ '
-        + this.currentdate.getHours() + ':'
-        + this.currentdate.getMinutes() + ':'
-        + this.currentdate.getSeconds();
+      this.datetime = this.currentDate.getDate() + '/'
+        + (this.currentDate.getMonth() + 1 ) + '/'
+        + this.currentDate.getFullYear() + ' @ '
+        + this.currentDate.getHours() + ':'
+        + this.currentDate.getMinutes() + ':'
+        + this.currentDate.getSeconds();
       const pathFirebase = 'ProductInfo/' + this.editKey;
       this.af.object(pathFirebase)
         .update({'Price': this.model.Price,
@@ -71,12 +70,12 @@ export class ProductComponent {
   addItem(): string {
     //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
     try{
-      this.datetime = this.currentdate.getDate() + '/'
-        + (this.currentdate.getMonth() + 1 ) + '/'
-        + this.currentdate.getFullYear() + ' @ '
-        + this.currentdate.getHours() + ':'
-        + this.currentdate.getMinutes() + ':'
-        + this.currentdate.getSeconds();
+      this.datetime = this.currentDate.getDate() + '/'
+        + (this.currentDate.getMonth() + 1 ) + '/'
+        + this.currentDate.getFullYear() + ' @ '
+        + this.currentDate.getHours() + ':'
+        + this.currentDate.getMinutes() + ':'
+        + this.currentDate.getSeconds();
 
       this.items.push({
         'InUse': this.model.InUse = true,
@@ -121,15 +120,6 @@ export class ProductComponent {
       return 'isAdd = true';
     }
     return 'isAdd = false';
-  }
-
-
-
-  openToEdit(keyparam: string): string {
-    this.onEdit();
-    this.editKey = keyparam;
-
-    return 'editKey=' + keyparam;
   }
 
   keyToEdit(keyparam: string, item: ProductItem) {

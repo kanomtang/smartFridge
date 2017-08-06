@@ -1,122 +1,253 @@
-<h1>{{title}} <button type="button" class="btn btn-success" (click)="onAdding()">Create new product</button></h1>
-<div [hidden]="!isAdd" class="container">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+
+<div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <h1>Adding new customer</h1>
-      <form #addForm="ngForm" >
+    <div class="productTable">
+      <!--<h4>Bootstrap Snipp for Datatable</h4>-->
+      <div class="table-responsive">
+        <table id="mytable" class="table table-bordred table-striped">
 
+          <thead>
+          <th style="padding-left: 10px">Name</th>
+          <th>City</th>
+          <th>Province</th>
+          <th>Edit</th>
+          <th>Delete</th>
+          <th  style="text-align: center">
+            <p data-placement="top" data-toggle="tooltip" title="Add new product"><button class="btn btn-default btn-xs" data-title="Edit" data-toggle="modal" data-target="#add"><span class="glyphicon glyphicon-plus"></span></button></p>
+          </th>
+          </thead>
 
+          <tbody>
+          <tr *ngFor="let homeUser of users| async">
+            <td>{{homeUser.customerFName}} {{homeUser.customerLName}}</td>
+            <td>{{homeUser.city}}</td>
+            <td>{{homeUser.province}}</td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Edit"><button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" data-target="#edit" (click)="keyToEdit(homeUser.$key,homeUser)"><span class="glyphicon glyphicon-pencil"></span></button></p></td>
+            <td><p data-placement="top" data-toggle="tooltip" title="Delete"><button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" data-target="#delete" (click)="keyToDelete(homeUser.$key)"><span class="glyphicon glyphicon-trash"></span></button></p></td>
+          </tr>
+          </tbody>
 
-
-        <div class="form-group">
-          <label for="CustomerFName">First Name</label>
-          <input type="text"  id="CustomerFName" name="CustomerFName"
-                 [(ngModel)]="model.CustomerFName" class="form-group">
-
-        </div>
-
-
-        <div class="form-group">
-          <label for="CustomerFName">Last Name</label>
-          <input type="text"  id="CustomerLName" name="CustomerLName"
-                 [(ngModel)]="model.CustomerLName" class="form-group">
-
-        </div>
-        <label >Address</label>
-        <div class="form-group">
-          <label for="City">City</label>
-          <input type="text"  id="City" name="City"
-                 [(ngModel)]="model.City" class="form-group">
-
-
-          <label for="Province">Province</label>
-          <input type="text"  id="Province" name="Province"
-                 [(ngModel)]="model.Province" class="form-group">
-
-
-
-        </div>
-
-        <div>
-          <button class="btn btn-success" (click)="addItem()"
-                  [disabled]="!addForm.form.valid"> Add </button>
-
-        </div>
-      </form>
-    </div>
-  </div>
-
-</div>
-<label >First name</label>
-<label > Last name</label>
-<label >City</label>
-<label >Province</label>
-<ul *ngFor="let SingleUser  of users | async">
-  <div>
-    <label >{{ SingleUser.CustomerFName}}</label>
-    <label >{{ SingleUser.CustomerLName }}</label>
-    <label >{{ SingleUser.City }}</label>
-    <label >{{ SingleUser.Province }}</label>
-  </div>
-
-
-  <button [disabled]="!isEdit" type="button" class="btn btn-warning" (click)="openToEdit(SingleUser.$key)">Edit</button>
-  <button type="button" class="btn btn-danger" (click)="deleteItem(SingleUser.$key)">Delete</button>
-  <div *ngIf="editKey == SingleUser.$key">
-
-
-
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h1>Adding new customer</h1>
-          <form #editForm="ngForm">
-
-
-
-
-            <div class="form-group">
-              <label for="CustomerFNamee">First Name</label>
-              <input type="text"  id="CustomerFNamee" name="CustomerFNamee"
-                     [(ngModel)]="model.CustomerFName" class="form-group">
-
-            </div>
-
-
-            <div class="form-group">
-              <label for="CustomerFNamee">Last Name</label>
-              <input type="text"  id="CustomerLNamee" name="CustomerLNamee"
-                     [(ngModel)]="model.CustomerLName" class="form-group">
-
-            </div>
-            <label >Address</label>
-            <div class="form-group">
-              <label for="Cityy">City</label>
-              <input type="text"  id="Cityy" name="Cityy"
-                     [(ngModel)]="model.City" class="form-group">
-
-
-              <label for="Provincee">Province</label>
-              <input type="text"  id="Provincee" name="Provincee"
-                     [(ngModel)]="model.Province" class="form-group">
-
-
-
-            </div>
-
-            <div>
-              <button class="btn btn-success" (click)="addItem()"
-                      [disabled]="!editForm.form.valid"> Add </button>
-
-            </div>
-          </form>
-        </div>
+        </table>
       </div>
     </div>
   </div>
+</div>
+
+
+<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="EditHeading">Edit Your Detail</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label for="editFName">Firstname</label>
+          <input id="editFName" class="form-control " type="text" [(ngModel)]="model.customerFName">
+        </div>
+        <div class="form-group">
+          <label for="editLName">Lastname</label>
+          <input id="editLName" class="form-control " type="text" [(ngModel)]="model.customerLName">
+        </div>
+        <div class="form-group">
+          <label for="editCity">City</label>
+          <input id="editCity" class="form-control " type="text" [(ngModel)]="model.city">
+        </div>
+        <div class="form-group">
+          <label for="editProvince">Province</label>
+          <input id="editProvince" class="form-control " type="text" [(ngModel)]="model.province">
+        </div>
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" data-dismiss="modal" (click)="updateItem()"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="DeleteHeading">Delete this entry</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="alert alert-danger"><span class="glyphicon glyphicon-warning-sign"></span> Are you sure you want to delete this Record?</div>
+
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" data-dismiss="modal" (click)="deleteItem()"><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+        <h4 class="modal-title custom_align" id="AddHeading">Add new product</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="addFName">Firstname</label>
+          <input id="addFName" class="form-control " type="text" [(ngModel)]="model.customerFName">
+        </div>
+        <div class="form-group">
+          <label for="addLName">Lastname</label>
+          <input id="addLName" class="form-control " type="text" [(ngModel)]="model.customerLName">
+        </div>
+        <div class="form-group">
+          <label for="addCity">City</label>
+          <input id="addCity" class="form-control " type="text" [(ngModel)]="model.city">
+        </div>
+        <div class="form-group">
+          <label for="addProvince">Province</label>
+          <input id="addProvince" class="form-control " type="text" [(ngModel)]="model.province">
+        </div>
+
+      </div>
+      <div class="modal-footer ">
+        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addItem()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<!--<h1>{{title}} <button type="button" class="btn btn-success" (click)="onAdding()">Create new product</button></h1>-->
+<!--<div [hidden]="!isAdd" class="container">-->
+  <!--<div class="row">-->
+    <!--<div class="col-md-12">-->
+      <!--<h1>Adding new customer</h1>-->
+      <!--<form #addForm="ngForm" >-->
 
 
 
-</ul>
+
+        <!--<div class="form-group">-->
+          <!--<label for="CustomerFName">First Name</label>-->
+          <!--<input type="text"  id="CustomerFName" name="CustomerFName"-->
+                 <!--[(ngModel)]="model.customerFName" class="form-group">-->
+
+        <!--</div>-->
+
+
+        <!--<div class="form-group">-->
+          <!--<label for="CustomerFName">Last Name</label>-->
+          <!--<input type="text"  id="CustomerLName" name="CustomerLName"-->
+                 <!--[(ngModel)]="model.customerLName" class="form-group">-->
+
+        <!--</div>-->
+        <!--<label >Address</label>-->
+        <!--<div class="form-group">-->
+          <!--<label for="City">City</label>-->
+          <!--<input type="text"  id="City" name="City"-->
+                 <!--[(ngModel)]="model.city" class="form-group">-->
+
+
+          <!--<label for="Province">Province</label>-->
+          <!--<input type="text"  id="Province" name="Province"-->
+                 <!--[(ngModel)]="model.province" class="form-group">-->
+
+
+
+        <!--</div>-->
+
+        <!--<div>-->
+          <!--<button class="btn btn-success" (click)="addItem()"-->
+                  <!--[disabled]="!addForm.form.valid"> Add </button>-->
+
+        <!--</div>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</div>-->
+
+<!--</div>-->
+<!--<label >First name</label>-->
+<!--<label > Last name</label>-->
+<!--<label >City</label>-->
+<!--<label >Province</label>-->
+<!--<ul *ngFor="let SingleUser of users | async">-->
+  <!--<div>-->
+    <!--<label >{{ SingleUser.customerFName}}</label>-->
+    <!--<label >{{ SingleUser.customerLName }}</label>-->
+    <!--<label >{{ SingleUser.city }}</label>-->
+    <!--<label >{{ SingleUser.province }}</label>-->
+  <!--</div>-->
+
+
+  <!--<button [disabled]="!isEdit" type="button" class="btn btn-warning" (click)="openToEdit(SingleUser.$key)">Edit</button>-->
+  <!--<button type="button" class="btn btn-danger" (click)="deleteItem(SingleUser.$key)">Delete</button>-->
+  <!--<div *ngIf="editKey == SingleUser.$key">-->
+
+
+
+    <!--<div class="container">-->
+      <!--<div class="row">-->
+        <!--<div class="col-md-12">-->
+          <!--<h1>Adding new customer</h1>-->
+          <!--<form #editForm="ngForm">-->
+
+
+
+
+            <!--<div class="form-group">-->
+              <!--<label for="CustomerFNamee">First Name</label>-->
+              <!--<input type="text"  id="CustomerFNamee" name="CustomerFNamee"-->
+                     <!--[(ngModel)]="model.customerFName" class="form-group">-->
+
+            <!--</div>-->
+
+
+            <!--<div class="form-group">-->
+              <!--<label for="CustomerFNamee">Last Name</label>-->
+              <!--<input type="text"  id="CustomerLNamee" name="CustomerLNamee"-->
+                     <!--[(ngModel)]="model.customerLName" class="form-group">-->
+
+            <!--</div>-->
+            <!--<label >Address</label>-->
+            <!--<div class="form-group">-->
+              <!--<label for="Cityy">City</label>-->
+              <!--<input type="text"  id="Cityy" name="Cityy"-->
+                     <!--[(ngModel)]="model.city" class="form-group">-->
+
+
+              <!--<label for="Provincee">Province</label>-->
+              <!--<input type="text"  id="Provincee" name="Provincee"-->
+                     <!--[(ngModel)]="model.province" class="form-group">-->
+
+
+
+            <!--</div>-->
+
+            <!--<div>-->
+              <!--<button class="btn btn-success" (click)="addItem()"-->
+                      <!--[disabled]="!editForm.form.valid"> Add </button>-->
+
+            <!--</div>-->
+          <!--</form>-->
+        <!--</div>-->
+      <!--</div>-->
+    <!--</div>-->
+  <!--</div>-->
+
+
+
+<!--</ul>-->
 
 

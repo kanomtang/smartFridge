@@ -1,112 +1,102 @@
 import {Component, Input} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
-
-import {User} from '../shared/user';
-
+import {User} from '../shared/User';
 
 @Component({
   selector: 'app-user-component',
-  templateUrl: './user-component.component.html'
+  templateUrl: './user-component.component.html',
+  styleUrls: ['./user-component.component.css']
 })
 export class UserComponentComponent {
+  @Input() User: User;
   title = 'Home User ';
-  users: FirebaseListObservable<any[]>;
-  user
-
+  users: FirebaseListObservable<User[]>;
+  user: FirebaseObjectObservable<any>;
   isEdit = true;
   isAdd = false;
   model = new User();
-  currentdate = new Date();
+  currentDate = new Date();
   datetime: string;
   editKey: string;
-
+  deleteKey: string;
 
 
   constructor(private af: AngularFireDatabase) {
     this.users = af.list('/CustomerInfo');
+    console.log(this.users);
 
   }
 
-  deleteItem(keyparam: string): string {
+  deleteItem(): string {
     // delete single item
     // the first slot is path or child
     // the second is key
-    try{
-      const pathFirbase = 'CustomerInfo/' + keyparam;
+    try {
+      const pathFirbase = 'CustomerInfo/' + this.deleteKey;
       this.af.object(pathFirbase)
         .remove()
         .then(() => alert('Successful for deleting user'));
-      return keyparam + 'has been delete'
+      return this.deleteKey + 'has been delete';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
 
   }
 
-  updateItem(keyparam: string): string {
+  updateItem(): string {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
-    try{
+    try {
       this.onEdit();
-      this.datetime = this.currentdate.getDate() + '/'
-        + (this.currentdate.getMonth() + 1 ) + '/'
-        + this.currentdate.getFullYear() + ' @ '
-        + this.currentdate.getHours() + ':'
-        + this.currentdate.getMinutes() + ':'
-        + this.currentdate.getSeconds();
-      const pathFirebase = 'ProductInfo/' + keyparam;
+      this.datetime = this.currentDate.getDate() + '/'
+        + (this.currentDate.getMonth() + 1 ) + '/'
+        + this.currentDate.getFullYear() + ' @ '
+        + this.currentDate.getHours() + ':'
+        + this.currentDate.getMinutes() + ':'
+        + this.currentDate.getSeconds();
+      const pathFirebase = 'CustomerInfo/' + this.editKey;
       this.af.object(pathFirebase)
         .update({
-          'City': this.model.City,
-
-          'Province': this.model.Province,
-
-
-          'CustomerFName': this.model.CustomerFName,
-          'CustomerLname': this.model.CustomerLName} )
+          'city': this.model.city,
+          'province': this.model.province,
+          'customerFName': this.model.customerFName,
+          'customerLName': this.model.customerLName} )
         .then(() => alert('Successful for Updating '));
       this.editKey = null;
-      return  keyparam + 'has been update'
+      return  this.model.customerFName + 'has been update';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
   }
 
-  addItem(key: string): string {
+  addItem(): string {
     //  อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
-
-    try{
-      this.datetime = this.currentdate.getDate() + '/'
-        + (this.currentdate.getMonth() + 1 ) + '/'
-        + this.currentdate.getFullYear() + ' @ '
-        + this.currentdate.getHours() + ':'
-        + this.currentdate.getMinutes() + ':'
-        + this.currentdate.getSeconds();
+    try {
+      this.datetime = this.currentDate.getDate() + '/'
+        + (this.currentDate.getMonth() + 1 ) + '/'
+        + this.currentDate.getFullYear() + ' @ '
+        + this.currentDate.getHours() + ':'
+        + this.currentDate.getMinutes() + ':'
+        + this.currentDate.getSeconds();
 
       this.users.push({
-        'City': this.model.City,
-
-        'Province': this.model.Province,
-
-
-
-        'CustomerFName': this.model.CustomerFName,
-        'CustomerLName': this.model.CustomerLName
+        'city': this.model.city,
+        'province': this.model.province,
+        'customerFName': this.model.customerFName,
+        'customerLName': this.model.customerLName
       })
         .then(
           () => alert('Successful for adding new Customer')
         );
-      this.model.City = null;
-      this.model.Province = null;
-      this.model.CustomerLName = null;
-      this.model.CustomerFName= null;
+      this.model.city = null;
+      this.model.province = null;
+      this.model.customerLName = null;
+      this.model.customerFName = null;
       this.onAdding();
-      return 'user has been added'
+      return 'user has been added';
     }catch (err) {
-      return 'error'
+      return 'error';
     }
   }
-
-
 
 
   onEdit(): string {
@@ -115,9 +105,9 @@ export class UserComponentComponent {
       this.isEdit = false;
     } else {
       this.isEdit = true;
-      return 'isEdit = true'
+      return 'isEdit = true';
     }
-    return 'isEdit = false'
+    return 'isEdit = false';
   }
 
   onAdding(): string {
@@ -126,18 +116,26 @@ export class UserComponentComponent {
       this.isAdd = false;
     } else {
       this.isAdd = true;
-      return 'isAdd = true'
+      return 'isAdd = true';
     }
-    return 'isAdd = false'
+    return 'isAdd = false';
   }
 
+  //
+  // openToEdit(keyparam: string): string {
+  //   this.onEdit();
+  //   this.editKey = keyparam;
+  //
+  //   return 'editKey=' + keyparam;
+  // }
 
-  openToEdit(keyparam: string): string {
-    this.onEdit();
+  keyToEdit(keyparam: string, item: User) {
     this.editKey = keyparam;
-
-    return 'editKey=' + keyparam;
+    this.model = Object.assign({}, item);
+    console.log(this.model);
   }
 
-
+  keyToDelete(keyparam: string) {
+    this.deleteKey = keyparam;
+  }
 }
