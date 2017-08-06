@@ -6,6 +6,12 @@ body {
   padding-top: 30px;
 }
 
+.logoutButton{
+  float: right;
+  margin-top: 15px;
+  color: dimgrey;
+}
+
 .row{
 padding-left: 0;
 }
@@ -19,6 +25,10 @@ padding-left: 0;
   background-color: #ffffff;
   border: 1px solid #dddddd;
   color: #777777;
+}
+
+.faq-cat-tabs li a:active {
+  color: black;
 }
 
 .nav-tabs li a:focus,

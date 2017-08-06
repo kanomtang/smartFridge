@@ -1,3 +1,10 @@
+<script>
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    e.target // newly activated tab
+    e.relatedTarget // previous active tab
+  })
+</script>
+
 <div class="container">
   <div class="jumbotron">
     <div class="page-header">
@@ -19,16 +26,19 @@
       <div class="col-md-8 col-md-offset-2">
         <!-- Nav tabs category -->
         <ul class="nav nav-tabs faq-cat-tabs">
-          <li ><a href="#faq-cat-1" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Product</a></li>
-          <li class="active"><a href="#faq-cat-2" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Home User</a></li>
+          <li class="active"><a href="#faq-cat-1" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Product</a></li>
+          <li><a href="#faq-cat-2" data-toggle="tab"><i class="glyphicon glyphicon-th-list"></i> Home User</a></li>
+          <button type="button" class="btn btn-default btn-sm logoutButton" (click)="logout()">
+            <span class="glyphicon glyphicon-log-out"></span> Log out
+          </button>
         </ul>
 
         <!-- Tab panes -->
         <div class="tab-content faq-cat-content">
-          <div class="tab-pane fade" id="faq-cat-1">
+          <div class="tab-pane active in fade" id="faq-cat-1">
             <app-product>Preparing product information</app-product>
           </div>
-          <div class="tab-pane active in fade" id="faq-cat-2">
+          <div class="tab-pane fade" id="faq-cat-2">
 
             <app-user-component></app-user-component>
             <!--<div class="panel-group" id="accordion-cat-2">-->
@@ -101,6 +111,7 @@
             <!--</div>-->
           </div>
         </div>
+
       </div>
     </div>
     </div>
