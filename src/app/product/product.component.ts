@@ -33,7 +33,7 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this.deleteKey;
       this.af.object(pathFirebase)
         .remove()
-        .then(() => alert('Successful for deleting item '));
+        .then(() => alert('Successful for deleting product '));
 
       return this.deleteKey + 'has been deleted';
     }catch (err) {
