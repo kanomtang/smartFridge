@@ -35,7 +35,7 @@ export class UserComponentComponent {
       const pathFirbase = 'CustomerInfo/' + this.deleteKey;
       this.af.object(pathFirbase)
         .remove()
-        .then(() => alert('Successful for deleting user'));
+        .then(() => alert('Successful for deleting home user'));
       return this.deleteKey + 'has been delete';
     }catch (err) {
       return 'error';
@@ -60,7 +60,7 @@ export class UserComponentComponent {
           'province': this.model.province,
           'customerFName': this.model.customerFName,
           'customerLName': this.model.customerLName} )
-        .then(() => alert('Successful for Updating '));
+        .then(() => alert('Successful for updating '));
       this.editKey = null;
       return  this.model.customerFName + 'has been update';
     }catch (err) {
@@ -85,7 +85,7 @@ export class UserComponentComponent {
         'customerLName': this.model.customerLName
       })
         .then(
-          () => alert('Successful for adding new Customer')
+          () => alert('Successful for adding new home user')
         );
       this.model.city = null;
       this.model.province = null;
