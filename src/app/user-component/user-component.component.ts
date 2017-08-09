@@ -139,11 +139,11 @@ export class UserComponentComponent {
     this.deleteKey = keyparam;
   }
 
-  isEmpty(){
+  isEmpty() {
     return this.model.customerFName && this.model.customerLName && this.model.city && this.model.province;
   }
 
-  clearData(){
+  clearData() {
     this.model = Object.assign({}, null);
   }
 

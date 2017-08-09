@@ -28,7 +28,7 @@ export class RegisterPageComponent implements OnInit {
         this.authService.signup(this.email, this.password);
 
       }else {
-        alert('password is not match');
+        alert('password is not matched');
       }
         // .subscribe(
         //   () => {

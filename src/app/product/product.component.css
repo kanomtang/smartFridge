@@ -14,3 +14,9 @@ th p{
 .productTable{
   width: 100%;
 }
+
+.inform{
+  color: dimgrey;
+  font-size: xx-small;
+  margin-left: 3px;
+}

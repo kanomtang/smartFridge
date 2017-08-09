@@ -130,11 +130,11 @@ export class ProductComponent {
     this.deleteKey = keyparam;
   }
 
-  isEmpty(){
-    return this.model.ProductName && this.model.Price && (this.model.Price>0);
+  isEmpty() {
+    return this.model.ProductName && this.model.Price && (this.model.Price > 0);
   }
 
-  clearData(){
+  clearData() {
     this.model = Object.assign({}, null);
   }
 
