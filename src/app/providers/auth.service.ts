@@ -51,7 +51,7 @@ export class AuthService {
         .catch(err => {
           console.log('Something went wrong:', err.message);
           if (err.message) {
-            alert(err.message);
+            alert("email or password is invalid");
           }
         });
     }else {

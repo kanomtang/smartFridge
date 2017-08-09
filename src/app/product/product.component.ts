@@ -33,7 +33,7 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this.deleteKey;
       this.af.object(pathFirebase)
         .remove()
-        .then(() => alert('Successful for deleting product '));
+        .then(() => alert('Successful for deleting product'));
 
       return this.deleteKey + 'has been deleted';
     }catch (err) {
@@ -54,13 +54,12 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this.editKey;
       this.af.object(pathFirebase)
         .update({'Price': this.model.Price,
-
           'ProductName': this.model.ProductName,
           'LastUpdate' : this.model.LastUpdate = this.datetime,
           'InUse': true} )
         .then(() => alert('Successful for Updating '));
-      this.editKey = null;
-      return this.model.ProductName + 'has been update';
+
+      return this.editKey + 'has been update';
     }catch (err) {
       return 'error';
     }
@@ -69,7 +68,6 @@ export class ProductComponent {
   addItem(): string {
     //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
     try{
-
       this.datetime = this.currentDate.getDate() + '/'
         + (this.currentDate.getMonth() + 1 ) + '/'
         + this.currentDate.getFullYear() + ' @ '
@@ -86,7 +84,7 @@ export class ProductComponent {
         'LastUpdate' : this.model.LastUpdate = this.datetime
       })
         .then(
-          () => alert('Successful for adding new product')
+          () => alert('Successful for adding new item')
         );
       this.model.InUse = null;
       this.model.ProductName = null;
@@ -95,7 +93,6 @@ export class ProductComponent {
       this.onAdding();
       return   'item has been added';
     }catch (err) {
-      console.log(err.message);
       return 'error';
     }
   }
@@ -131,6 +128,14 @@ export class ProductComponent {
 
   keyToDelete(keyparam: string) {
     this.deleteKey = keyparam;
+  }
+
+  isEmpty(){
+    return this.model.ProductName && this.model.Price && (this.model.Price>0);
+  }
+
+  clearData(){
+    this.model = Object.assign({}, null);
   }
 
 }
