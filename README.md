@@ -2,6 +2,28 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
 
+## Get start
+
+//open command line
+ctrl+r -> cmd
+
+//get into the project folder
+cd folderName
+//to go back
+cd ..
+
+// in the project folder 
+npm install
+npm install -g @angular/cli
+npm install firebase angularfire2 --save
+npm install promise-polyfill --save-exact
+
+//to start the project
+ng serve
+
+//then, in the web browser
+http://localhost:4200
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
