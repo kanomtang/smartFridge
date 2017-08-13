@@ -62,7 +62,7 @@
         </div>
       </div>
       <div class="modal-footer ">
-        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" data-dismiss="modal" (click)="updateItem()" [disabled]="!isEmpty()"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
+        <button type="button" class="btn btn-warning btn-lg" style="width: 100%;" data-dismiss="modal" (click)="updateItem()" [disabled]="isEmpty() || hasNumbers()"><span class="glyphicon glyphicon-ok-sign"></span> Update</button>
       </div>
     </div>
     <!-- /.modal-content -->
@@ -120,7 +120,7 @@
 
       </div>
       <div class="modal-footer ">
-        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addItem()" [disabled]="!isEmpty()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addItem()" [disabled]="isEmpty() || hasNumbers()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
       </div>
     </div>
     <!-- /.modal-content -->

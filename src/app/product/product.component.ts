@@ -44,6 +44,7 @@ export class ProductComponent {
         .then(() => alert('Successful for deleting product'));
       return true;
     }catch (err) {
+      console.log(err.message);
       return false;
     }
   }
@@ -73,6 +74,7 @@ export class ProductComponent {
         .then(() => alert('Successful for Updating '));
       return this.model;
     }catch (err) {
+      console.log(err.message);
       return null;
     }
   }
@@ -98,13 +100,22 @@ export class ProductComponent {
         );
       return this.model;
     }catch (err) {
+      console.log(err.message);
       return null;
     }
   }
 
   isEmpty(): boolean {
-    return this.model.ProductName && this.model.Price && (this.model.Price > 0);
+    if(this.model.ProductName && this.model.Price){
+      return false;
+    }else{
+      return true;
+    }
     //return true;
+  }
+
+  isNotPositivePrice(): boolean{
+    return this.model.Price <= 0;
   }
 
   clearData(): ProductItem {

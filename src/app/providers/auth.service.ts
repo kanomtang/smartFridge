@@ -18,7 +18,7 @@ export class AuthService {
   }
 
 
-  signup(email: string, password: string) {
+  signup(email: string, password: string){
     this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
@@ -37,7 +37,7 @@ export class AuthService {
   }
 
 
-  login(email: string, password: string) {
+  login(email: string, password: string){
     if (email && password) {
       this.firebaseAuth
         .auth
@@ -46,12 +46,14 @@ export class AuthService {
           console.log('Nice, it worked!');
           console.log(this.user);
           this.router.navigate(['home']);
+          return this.user;
         })
         .catch(err => {
           console.log('Something went wrong:', err.message);
           if (err.message) {
             alert("email or password is invalid");
           }
+          return null;
         });
     }else {
       alert('Email or Password is missing.');

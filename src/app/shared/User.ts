@@ -3,4 +3,6 @@ export class User {
   customerLName: string;
   city: string;
   province: string;
+  createdDate: string;
+  lastUpdate: string;
 }

@@ -16,27 +16,23 @@ export class RegisterPageComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router) {
   }
-  isPasswordMatch() {
+    isPasswordMatch() : boolean {
       return this.password === this.confirmPassword;
     }
-    isEmpty() {
-      return(this.email && this.password && this.confirmPassword);
+    isEmpty() : boolean{
+      if(this.email && this.password && this.confirmPassword){
+        return true;
+      }else{
+        return false;
+      }
     }
 
     signUp() {
       if (this.isPasswordMatch()) {
         this.authService.signup(this.email, this.password);
-
       }else {
         alert('password is not matched');
       }
-        // .subscribe(
-        //   () => {
-        //     alert('User created successfully !');
-        //     this.router.navigateByUrl('/home');
-        //   },
-        //   err => alert(err)
-        // );
     }
 
 

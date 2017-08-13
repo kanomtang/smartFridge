@@ -27,7 +27,16 @@ export class UserComponentComponent {
 
   }
 
-  deleteItem(): string {
+  getList(): FirebaseListObservable<User[]> {
+    return this.users;
+  }
+
+  keyToDelete(keyparam: string) : string{
+    this.deleteKey = keyparam;
+    return keyparam;
+  }
+
+  deleteItem(): boolean {
     // delete single item
     // the first slot is path or child
     // the second is key
@@ -36,17 +45,23 @@ export class UserComponentComponent {
       this.af.object(pathFirbase)
         .remove()
         .then(() => alert('Successful for deleting user'));
-      return this.deleteKey + 'has been delete';
+      return true;
     }catch (err) {
-      return 'error';
+      console.log(err.message);
+      return false;
     }
-
   }
 
-  updateItem(): string {
+  keyToEdit(keyparam: string, item: User) : string {
+    this.editKey = keyparam;
+    this.model = Object.assign({}, item);
+    console.log(this.model);
+    return keyparam;
+  }
+
+  updateItem(): User {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
     try {
-      this.onEdit();
       this.datetime = this.currentDate.getDate() + '/'
         + (this.currentDate.getMonth() + 1 ) + '/'
         + this.currentDate.getFullYear() + ' @ '
@@ -59,16 +74,18 @@ export class UserComponentComponent {
           'city': this.model.city,
           'province': this.model.province,
           'customerFName': this.model.customerFName,
-          'customerLName': this.model.customerLName} )
-        .then(() => alert('Successful for Updating '));
-      this.editKey = null;
-      return  this.model.customerFName + 'has been update';
+          'customerLName': this.model.customerLName,
+          'lastUpdate' : this.model.lastUpdate = this.datetime
+        })
+        .then(() => alert('Successful for updating home user'));
+      return  this.model;
     }catch (err) {
-      return 'error';
+      console.log(err.message);
+      return null;
     }
   }
 
-  addItem(): string {
+  addItem(): User {
     //  อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
     try {
       this.datetime = this.currentDate.getDate() + '/'
@@ -77,74 +94,40 @@ export class UserComponentComponent {
         + this.currentDate.getHours() + ':'
         + this.currentDate.getMinutes() + ':'
         + this.currentDate.getSeconds();
-
       this.users.push({
         'city': this.model.city,
         'province': this.model.province,
         'customerFName': this.model.customerFName,
-        'customerLName': this.model.customerLName
+        'customerLName': this.model.customerLName,
+        'createdDate': this.model.createdDate = this.datetime,
+        'lastUpdate' : this.model.lastUpdate = this.datetime
       })
         .then(
-          () => alert('Successful for adding new Customer')
+          () => alert('Successful for adding new home user')
         );
-      this.model.city = null;
-      this.model.province = null;
-      this.model.customerLName = null;
-      this.model.customerFName = null;
-      this.onAdding();
-      return 'user has been added';
+      return this.model;
     }catch (err) {
-      return 'error';
+      console.log(err.message);
+      return null;
     }
   }
 
-
-  onEdit(): string {
-    // this method for change the state of isEdit that can disabled the button Edit or Save
-    if (this.isEdit === true) {
-      this.isEdit = false;
-    } else {
-      this.isEdit = true;
-      return 'isEdit = true';
+  isEmpty() : boolean {
+    if(this.model.customerFName && this.model.customerLName && this.model.city && this.model.province){
+      return false;
+    }else{
+      return true;
     }
-    return 'isEdit = false';
   }
 
-  onAdding(): string {
-    // this method for enable the user to adding the new product
-    if (this.isAdd === true) {
-      this.isAdd = false;
-    } else {
-      this.isAdd = true;
-      return 'isAdd = true';
+  hasNumbers() : boolean {
+    return /\d/.test(this.model.customerFName) || /\d/.test(this.model.customerLName)
+      || /\d/.test(this.model.city) || /\d/.test(this.model.province);
     }
-    return 'isAdd = false';
-  }
 
-  //
-  // openToEdit(keyparam: string): string {
-  //   this.onEdit();
-  //   this.editKey = keyparam;
-  //
-  //   return 'editKey=' + keyparam;
-  // }
-
-  keyToEdit(keyparam: string, item: User) {
-    this.editKey = keyparam;
-    this.model = Object.assign({}, item);
-    console.log(this.model);
-  }
-
-  keyToDelete(keyparam: string) {
-    this.deleteKey = keyparam;
-  }
-
-  isEmpty() {
-    return this.model.customerFName && this.model.customerLName && this.model.city && this.model.province;
-  }
-
-  clearData() {
+  clearData() : User{
     this.model = Object.assign({}, null);
+    return this.model;
   }
 
 }
