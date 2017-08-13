@@ -22,10 +22,18 @@ export class ProductComponent {
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
-
+    console.log(this.items);
+  }
+  getList(): FirebaseListObservable<ProductItem[]> {
+    return this.items;
   }
 
-  deleteItem(): string {
+  keyToDelete(keyparam: string): string {
+    this.deleteKey = keyparam;
+    return keyparam;
+  }
+
+  deleteItem(): boolean {
     // delete single item
     // the first slot is path or child
     // the second is key
@@ -34,17 +42,22 @@ export class ProductComponent {
       this.af.object(pathFirebase)
         .remove()
         .then(() => alert('Successful for deleting product'));
-
-      return this.deleteKey + 'has been deleted';
+      return true;
     }catch (err) {
-      return 'error';
+      return false;
     }
   }
 
-  updateItem(): string {
+  keyToEdit(keyparam: string, item: ProductItem): string {
+    this.editKey = keyparam;
+    this.model = Object.assign({}, item);
+    console.log(this.model);
+    return keyparam;
+  }
+
+  updateItem(): ProductItem {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
     try {
-      this.onEdit();
       this.datetime = this.currentDate.getDate() + '/'
         + (this.currentDate.getMonth() + 1 ) + '/'
         + this.currentDate.getFullYear() + ' @ '
@@ -58,27 +71,24 @@ export class ProductComponent {
           'LastUpdate' : this.model.LastUpdate = this.datetime,
           'InUse': true} )
         .then(() => alert('Successful for Updating '));
-
-      return this.editKey + 'has been update';
+      return this.model;
     }catch (err) {
-      return 'error';
+      return null;
     }
   }
 
-  addItem(): string {
+  addItem(): ProductItem {
     //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
-    try{
+    try {
       this.datetime = this.currentDate.getDate() + '/'
         + (this.currentDate.getMonth() + 1 ) + '/'
         + this.currentDate.getFullYear() + ' @ '
         + this.currentDate.getHours() + ':'
         + this.currentDate.getMinutes() + ':'
         + this.currentDate.getSeconds();
-
       this.items.push({
         'InUse': this.model.InUse = true,
         'Price': this.model.Price,
-
         'ProductName': this.model.ProductName,
         'CreatedDate': this.model.CreatedDate = this.datetime,
         'LastUpdate' : this.model.LastUpdate = this.datetime
@@ -86,56 +96,20 @@ export class ProductComponent {
         .then(
           () => alert('Successful for adding new item')
         );
-      this.model.InUse = null;
-      this.model.ProductName = null;
-      this.model.Price = null;
-      this.model.CreatedDate = null;
-      this.onAdding();
-      return   'item has been added';
+      return this.model;
     }catch (err) {
-      return 'error';
+      return null;
     }
   }
 
-
-  onEdit(): string {
-    // this method for change the state of isEdit that can disabled the button Edit or Save
-    if (this.isEdit === true) {
-      this.isEdit = false;
-    } else {
-      this.isEdit = true;
-      return 'isEdit = true';
-    }
-    return 'isEdit = false';
-  }
-
-  onAdding(): string {
-    // this method for enable the user to adding the new product
-    if (this.isAdd === true) {
-      this.isAdd = false;
-    } else {
-      this.isAdd = true;
-      return 'isAdd = true';
-    }
-    return 'isAdd = false';
-  }
-
-  keyToEdit(keyparam: string, item: ProductItem) {
-    this.editKey = keyparam;
-    this.model = Object.assign({}, item);
-    console.log(this.model);
-  }
-
-  keyToDelete(keyparam: string) {
-    this.deleteKey = keyparam;
-  }
-
-  isEmpty() {
+  isEmpty(): boolean {
     return this.model.ProductName && this.model.Price && (this.model.Price > 0);
+    //return true;
   }
 
-  clearData() {
+  clearData(): ProductItem {
     this.model = Object.assign({}, null);
+    return this.model;
   }
 
 }

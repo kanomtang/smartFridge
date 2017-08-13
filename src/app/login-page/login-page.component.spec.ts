@@ -1,5 +1,5 @@
 import {async, ComponentFixture, ComponentFixtureAutoDetect, TestBed} from '@angular/core/testing';
-
+import { FormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page.component';
 import {AuthService} from '../providers/auth.service';
 import {Router} from '@angular/router';
@@ -15,6 +15,7 @@ class RouterStub {
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
   let fixture: ComponentFixture<LoginPageComponent>;
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -38,4 +39,7 @@ describe('LoginPageComponent', () => {
     expect(component).toBeTruthy();
     // expect(true).toBeTruthy();
   });
+
+
+
 });
