@@ -18,26 +18,30 @@ export class AuthService {
   }
 
 
-  signup(email: string, password: string){
+  signup(email: string, password: string): boolean {
     this.firebaseAuth
       .auth
       .createUserWithEmailAndPassword(email, password)
       .then(value => {
         console.log('Success!', value);
-        alert("Registration is successful");
+        console.log('user:', this.user);
+        alert('Registration is successful');
         this.logout();
         this.router.navigate(['login']);
+        return true;
       })
       .catch(err => {
         console.log('Something went wrong:', err.message);
         if (err.message) {
           alert(err.message);
         }
+        return false;
       });
+    return false;
   }
 
 
-  login(email: string, password: string){
+  login(email: string, password: string): boolean {
     if (email && password) {
       this.firebaseAuth
         .auth
@@ -46,24 +50,26 @@ export class AuthService {
           console.log('Nice, it worked!');
           console.log(this.user);
           this.router.navigate(['home']);
-          return this.user;
+          return true;
         })
         .catch(err => {
           console.log('Something went wrong:', err.message);
           if (err.message) {
-            alert("email or password is invalid");
+            alert('email or password is invalid');
           }
-          return null;
+          return false;
         });
     }else {
       alert('Email or Password is missing.');
+      return false;
     }
   }
 
-  logout() {
+  logout(): boolean {
     this.firebaseAuth
       .auth
       .signOut();
+    return true;
   }
 
 }

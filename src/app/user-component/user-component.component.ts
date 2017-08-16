@@ -31,7 +31,7 @@ export class UserComponentComponent {
     return this.users;
   }
 
-  keyToDelete(keyparam: string) : string{
+  keyToDelete(keyparam: string): string {
     this.deleteKey = keyparam;
     return keyparam;
   }
@@ -52,7 +52,7 @@ export class UserComponentComponent {
     }
   }
 
-  keyToEdit(keyparam: string, item: User) : string {
+  keyToEdit(keyparam: string, item: User): string {
     this.editKey = keyparam;
     this.model = Object.assign({}, item);
     console.log(this.model);
@@ -112,7 +112,7 @@ export class UserComponentComponent {
     }
   }
 
-  isEmpty() : boolean {
+  isEmpty(): boolean {
     if(this.model.customerFName && this.model.customerLName && this.model.city && this.model.province){
       return false;
     }else{
@@ -120,12 +120,12 @@ export class UserComponentComponent {
     }
   }
 
-  hasNumbers() : boolean {
+  hasNumbers(): boolean {
     return /\d/.test(this.model.customerFName) || /\d/.test(this.model.customerLName)
       || /\d/.test(this.model.city) || /\d/.test(this.model.province);
     }
 
-  clearData() : User{
+  clearData(): User {
     this.model = Object.assign({}, null);
     return this.model;
   }

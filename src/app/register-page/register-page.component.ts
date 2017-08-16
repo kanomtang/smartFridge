@@ -16,13 +16,13 @@ export class RegisterPageComponent implements OnInit {
   constructor(private authService: AuthService,
               private router: Router) {
   }
-    isPasswordMatch() : boolean {
+    isPasswordMatch(): boolean {
       return this.password === this.confirmPassword;
     }
-    isEmpty() : boolean{
-      if(this.email && this.password && this.confirmPassword){
+    isEmpty(): boolean {
+      if (this.email && this.password && this.confirmPassword) {
         return true;
-      }else{
+      }else {
         return false;
       }
     }

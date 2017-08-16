@@ -9,12 +9,8 @@ import {Router} from '@angular/router'; ( AuthService)
 })
 export class HomePageComponent implements OnInit {
   title = 'WELCOME TO ISR ';
-  topicValue: number;
   constructor(private  authService: AuthService, private router: Router) { }
   ngOnInit() {
-  }
-  onSelectTopic(valueparam: number): void {
-    this.topicValue = valueparam;
   }
   logout() {
     this.authService.logout();

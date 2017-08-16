@@ -106,15 +106,15 @@ export class ProductComponent {
   }
 
   isEmpty(): boolean {
-    if(this.model.ProductName && this.model.Price){
+    if (this.model.ProductName && this.model.Price){
       return false;
-    }else{
+    }else {
       return true;
     }
     //return true;
   }
 
-  isNotPositivePrice(): boolean{
+  isNotPositivePrice(): boolean {
     return this.model.Price <= 0;
   }
 
