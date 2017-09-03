@@ -70,7 +70,7 @@ export class ProductComponent {
         .update({'Price': this.model.Price,
           'ProductName': this.model.ProductName,
           'LastUpdate' : this.model.LastUpdate = this.datetime,
-          'InUse': true} )
+          'InUse': this.model.InUse} )
         .then(() => alert('Successful for Updating '));
       return this.model;
     }catch (err) {

@@ -4,12 +4,34 @@
 
 th{
   font-size: small;
+  margin:10px; padding:10px;
 
 }
 
 th p{
   margin-top: 0.3cm;
+
 }
+
+td{
+  margin:10px; padding:10px;
+}
+/*table*/
+/*{*/
+  /*counter-reset: rowNumber;*/
+/*}*/
+
+/*table tr > td:first-child*/
+/*{*/
+  /*counter-increment: rowNumber;*/
+/*}*/
+
+/*table tr td:first-child::before*/
+/*{*/
+  /*content: counter(rowNumber);*/
+  /*min-width: 1em;*/
+  /*margin-right: 0.5em;*/
+/*}*/
 
 .productTable{
   width: 100%;
@@ -19,4 +41,13 @@ th p{
   color: dimgrey;
   font-size: xx-small;
   margin-left: 3px;
+}
+
+.list-group{
+  width: 100%;
+}
+
+.toggle{
+  width: 20px;
+  height: 20px;
 }

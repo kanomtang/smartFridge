@@ -4,12 +4,34 @@
 
 th{
   font-size: small;
-
+  margin:10px; padding:10px;
 }
 
 th p{
   margin-top: 0.3cm;
 }
+
+tbody{
+  background-color: white;
+  font-size: x-small;
+}
+
+/*table*/
+/*{*/
+  /*counter-reset: rowNumber;*/
+/*}*/
+
+/*table tr > td:first-child*/
+/*{*/
+  /*counter-increment: rowNumber;*/
+/*}*/
+
+/*table tr td:first-child::before*/
+/*{*/
+  /*content: counter(rowNumber);*/
+  /*min-width: 1em;*/
+  /*margin-right: 0.5em;*/
+/*}*/
 
 .productTable{
   width: 100%;
