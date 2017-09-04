@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, NgForm} from '@angular/forms';
+import { FormsModule, NgForm} from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
@@ -13,7 +13,8 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AuthGuardService } from './providers/auth-guard.service';
 import { UserComponentComponent } from './user-component/user-component.component';
-import {ProductComponent} from './product/product.component';
+import { ProductComponent } from './product/product.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 export const firebaseConfig = {
   apiKey: 'AIzaSyCFXny8pflQwLu9AyQu8ve9xI6qA9KR7PM',
@@ -47,6 +48,7 @@ const routes: Routes = [
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    NgxQRCodeModule,
     RouterModule.forRoot(routes)
   ],
   providers: [AuthService, AuthGuardService],

@@ -4,17 +4,22 @@
 
 th{
   font-size: small;
-  margin:10px; padding:10px;
+  margin-left:10px; padding-left:10px;
+  margin-right:10px; padding-right:10px;
 
 }
 
 th p{
   margin-top: 0.3cm;
-
 }
 
 td{
-  margin:10px; padding:10px;
+  margin-left:10px; padding-left:10px;
+  margin-right:10px; padding-right:10px;
+}
+
+.btn-toolbar .btn {
+  margin: 0px;
 }
 
 .productTable{
@@ -49,4 +54,8 @@ td{
 
 .table-hover > tbody > tr.hidden-table:hover > td {
   background-color:  #efefef;
+}
+
+.qrcode{
+  text-align: center;
 }
