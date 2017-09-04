@@ -16,22 +16,6 @@ th p{
 td{
   margin:10px; padding:10px;
 }
-/*table*/
-/*{*/
-  /*counter-reset: rowNumber;*/
-/*}*/
-
-/*table tr > td:first-child*/
-/*{*/
-  /*counter-increment: rowNumber;*/
-/*}*/
-
-/*table tr td:first-child::before*/
-/*{*/
-  /*content: counter(rowNumber);*/
-  /*min-width: 1em;*/
-  /*margin-right: 0.5em;*/
-/*}*/
 
 .productTable{
   width: 100%;
@@ -50,4 +34,19 @@ td{
 .toggle{
   width: 20px;
   height: 20px;
+}
+
+.inUseInput{
+  margin-left: 20px;
+}
+
+/*.hover:hover {*/
+  /*background-color: yellow;*/
+/*}*/
+.hidden-table:hover {
+  background-color: #efefef !important;
+}
+
+.table-hover > tbody > tr.hidden-table:hover > td {
+  background-color:  #efefef;
 }

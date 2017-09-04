@@ -5,5 +5,4 @@ export class ProductItem {
   Price: number;
   LastUpdate: string;
   ProductName: string;
-  Lots: Lot;
 }

@@ -9,7 +9,7 @@
         <table id="mytable" class="table">
 
           <thead>
-          <!--<th>No.</th>-->
+          <th>No.</th>
           <th style="padding-left: 10px" >Name</th>
           <th>City</th>
           <th>Province</th>
@@ -23,8 +23,8 @@
           </thead>
 
           <tbody>
-          <tr *ngFor="let homeUser of users| async">
-            <!--<td></td>-->
+          <tr *ngFor="let homeUser of users| async ; let i = index">
+            <td>{{i+1}}</td>
             <td>{{homeUser.customerFName}} {{homeUser.customerLName}}</td>
             <td>{{homeUser.city}}</td>
             <td>{{homeUser.province}}</td>

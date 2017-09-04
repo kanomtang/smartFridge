@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {ProductItem} from '../shared/ProductItem';
+import {Lot} from '../shared/Lot';
 
 @Component({
   selector: 'app-product',
@@ -11,7 +12,7 @@ export class ProductComponent {
   @Input() Productanditem: ProductItem;
   title = 'Product ';
   items: FirebaseListObservable<any[]>;
-  item: FirebaseObjectObservable<any>;
+  lots: FirebaseListObservable<any[]>;
   isEdit = true;
   isAdd = false;
   model = new ProductItem();
@@ -19,10 +20,13 @@ export class ProductComponent {
   datetime: string;
   editKey: string;
   deleteKey: string;
+  lotModel = new Lot();
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
     console.log(this.items);
+    this.lots = af.list('/Lots');
+    console.log(this.lots);
   }
   getList(): FirebaseListObservable<ProductItem[]> {
     return this.items;
@@ -111,16 +115,46 @@ export class ProductComponent {
     }else {
       return true;
     }
-    //return true;
+    // return true;
   }
 
   isNotPositivePrice(): boolean {
     return this.model.Price <= 0;
   }
 
+
+  keyToAddLot(keyparam: string): string {
+    this.lotModel.productID = keyparam;
+    return keyparam;
+  }
+
+  addLot(): Lot {
+    try {
+      this.lots.push({
+        'productID': this.lotModel.productID,
+        'lotID': this.lotModel.lotID = '-',
+        'expiryDate': this.lotModel.expiryDate,
+        'amount' : this.lotModel.amount
+      })
+        .then(
+          () => alert('Successful for adding new lot')
+        );
+      return this.lotModel;
+    }catch (err) {
+      console.log(err.message);
+      return null;
+    }
+  }
+
+
   clearData(): ProductItem {
     this.model = Object.assign({}, null);
     return this.model;
+  }
+
+  clearLotData(): Lot {
+    this.lotModel = Object.assign({}, null);
+    return this.lotModel;
   }
 
 }

@@ -4,6 +4,7 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import { Router } from '@angular/router';
+import {FirebaseApp} from 'angularfire2';
 
 
 @Injectable()
@@ -12,9 +13,11 @@ export class AuthService {
   items: FirebaseListObservable<any[]>;
   constructor(public db: AngularFireDatabase,
               private firebaseAuth: AngularFireAuth,
-              private router: Router ) {
+              private router: Router ,
+              private firebase: FirebaseApp) {
     this.user = firebaseAuth.authState;
     this.items = db.list('items');
+
   }
 
 
