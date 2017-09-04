@@ -20,6 +20,7 @@ export class ProductComponent {
   datetime: string;
   editKey: string;
   deleteKey: string;
+  deleteLotKey: string;
   lotModel = new Lot();
 
   constructor(private af: AngularFireDatabase) {
@@ -146,6 +147,26 @@ export class ProductComponent {
     }
   }
 
+  keyToDeleteLot(keyparam: string): string{
+    this.deleteLotKey = keyparam;
+    return keyparam;
+  }
+
+  deleteLot(): boolean {
+    // delete single item
+    // the first slot is path or child
+    // the second is key
+    try {
+      const pathFirebase = 'Lots/' + this.deleteLotKey;
+      this.af.object(pathFirebase)
+        .remove()
+        .then(() => alert('Successful for deleting lot'));
+      return true;
+    }catch (err) {
+      console.log(err.message);
+      return false;
+    }
+  }
 
   clearData(): ProductItem {
     this.model = Object.assign({}, null);
