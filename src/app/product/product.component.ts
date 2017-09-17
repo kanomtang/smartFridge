@@ -24,12 +24,15 @@ export class ProductComponent {
   deleteKey: string;
   deleteLotKey: string;
   lotModel = new Lot();
+  date: string;
+  num: number;
 
   constructor(private af: AngularFireDatabase) {
     this.items = af.list('/ProductInfo');
     console.log(this.items);
     this.lots = af.list('/Lots');
     console.log(this.lots);
+    this.date = this.getCurrentDate();
   }
   getList(): FirebaseListObservable<ProductItem[]> {
     return this.items;
@@ -113,12 +116,20 @@ export class ProductComponent {
   }
 
   isEmpty(): boolean {
-    if (this.model.ProductName && this.model.Price){
+    if (this.model.ProductName && this.model.Price) {
       return false;
     }else {
       return true;
     }
     // return true;
+  }
+
+  amountEmpty(): boolean{
+    if (this.lotModel.amount) {
+      return false;
+    }else{
+      return true;
+    }
   }
 
   isNotPositivePrice(): boolean {
@@ -133,10 +144,16 @@ export class ProductComponent {
 
   addLot(): Lot {
     try {
+      this.num = Number(this.date.slice(8, 10));
+      this.datetime = this.num + '/';
+      this.num = Number(this.date.slice(5, 7));
+      this.datetime = this.datetime + this.num + '/';
+      this.num = Number(this.date.slice(0, 4));
+      this.datetime = this.datetime + this.num;
       this.lots.push({
         'productID': this.lotModel.productID,
         'lotID': this.lotModel.lotID = '-',
-        'expiryDate': this.lotModel.expiryDate,
+        'expiryDate': this.datetime,
         'amount' : this.lotModel.amount
       })
         .then(
@@ -202,5 +219,20 @@ export class ProductComponent {
       </html>`
     );
     popupWin.document.close();
+  }
+
+  getCurrentDate(): string {
+    this.datetime = this.currentDate.getFullYear() + '-';
+    if (this.currentDate.getMonth() + 1 < 10) {
+      this.datetime = this.datetime + '0' + (this.currentDate.getMonth() + 1) + '-';
+    }else {
+      this.datetime = this.datetime + (this.currentDate.getMonth() + 1) + '-';
+    }
+    if (this.currentDate.getDate() < 10) {
+      this.datetime = this.datetime + '0' + this.currentDate.getDate();
+    }else {
+      this.datetime = this.datetime + this.currentDate.getDate();
+    }
+    return this.datetime;
   }
 }

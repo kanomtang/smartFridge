@@ -59,3 +59,39 @@ td{
 .qrcode{
   text-align: center;
 }
+
+/*date dropdown*/
+.container {
+
+  margin: 0 auto;
+}
+li {
+  padding-bottom: 20px;
+}
+select {
+  width: 100%;
+}
+.day-container {
+  border: 2px solid red;
+  padding: 3px;
+}
+.day-selector {
+  background-color: black;
+  color: white;
+}
+.month-container {
+  border: 2px solid blue;
+  padding: 3px;
+}
+.month-selector {
+  background-color: orange;
+  color: blue;
+}
+.year-container {
+  border: 2px solid green;
+  padding: 3px;
+}
+.year-selector {
+  background-color: purple;
+  color: orange;
+}

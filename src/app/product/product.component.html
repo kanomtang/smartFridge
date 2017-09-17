@@ -4,7 +4,6 @@
 <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
 
-
 <div class="container">
   <div class="row">
     <div class="productTable">
@@ -168,24 +167,31 @@
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="expiryDate">Expiry Date</label>
-          <input id="expiryDate" class="form-control" type="text" pattern="\d{1,2}/\d{1,2}/\d{4}" name="date" value="" [(ngModel)]="lotModel.expiryDate">
+          <label for="expiryDate" class="col-2 col-form-label">Expiry Date</label>
+          <div class="col-10">
+            <input class="form-control" type="date" value="" min="{{getCurrentDate()}}" id="expiryDate" [(ngModel)]="date">
+          </div>
         </div>
+
+        <div layout-gt-xs="row">
         <div class="form-group">
           <label for="amount">Amount</label>
           <input id="amount" class="form-control" type="number" min="0" step="1" max="1000" [(ngModel)]="lotModel.amount">
         </div>
+        </div>
       </div>
       <div class="modal-footer ">
-        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addLot()" ><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addLot()" [disabled]="amountEmpty()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
       </div>
     </div>
+
     <!-- /.modal-content -->
   </div>
   <!-- /.modal-dialog -->
 </div>
 
-<!--Delete Product-->
+
+<!--Delete Lot-->
 <div class="modal fade" id="deleteLot" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -220,7 +226,7 @@
 
         <div id="print-section">
         <!--your html stuff that you want to print-->
-        <ngx-qrcode [qrc-element-type]="elementType" [qrc-value] = "value"></ngx-qrcode>
+        <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="value"></ngx-qrcode>
         <p>{{value}}</p>
         </div>
 
