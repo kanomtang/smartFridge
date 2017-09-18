@@ -124,7 +124,7 @@ export class ProductComponent {
     // return true;
   }
 
-  amountEmpty(): boolean{
+  amountEmpty(): boolean {
     if (this.lotModel.amount) {
       return false;
     }else{
@@ -137,8 +137,9 @@ export class ProductComponent {
   }
 
 
-  keyToAddLot(keyparam: string): string {
+  keyToAddLot(keyparam: string, item: ProductItem): string {
     this.lotModel.productID = keyparam;
+    this.lotModel.lotID = item.ProductName + ',' + item.Price + ',';
     return keyparam;
   }
 
@@ -152,7 +153,7 @@ export class ProductComponent {
       this.datetime = this.datetime + this.num;
       this.lots.push({
         'productID': this.lotModel.productID,
-        'lotID': this.lotModel.lotID = '-',
+        'lotID': this.lotModel.lotID + this.datetime,
         'expiryDate': this.datetime,
         'amount' : this.lotModel.amount
       })
@@ -166,7 +167,7 @@ export class ProductComponent {
     }
   }
 
-  keyToDeleteLot(keyparam: string): string{
+  keyToDeleteLot(keyparam: string): string {
     this.deleteLotKey = keyparam;
     return keyparam;
   }
@@ -199,7 +200,7 @@ export class ProductComponent {
 
   qenerateQRcode(lot: Lot) {
     this.lotModel = Object.assign({}, lot);
-    this.value = this.lotModel.expiryDate;
+    this.value = this.lotModel.lotID;
   }
 
   print(): void {

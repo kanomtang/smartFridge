@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="9feb62be-01b8-4527-84ed-bfb18c8e8af3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/product/product.component.css" afterPath="$PROJECT_DIR$/src/app/product/product.component.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/product/product.component.html" afterPath="$PROJECT_DIR$/src/app/product/product.component.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/product/product.component.ts" afterPath="$PROJECT_DIR$/src/app/product/product.component.ts" />
@@ -23,13 +22,13 @@
       <file leaf-file-name="product.component.ts" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/product/product.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="410">
-              <caret line="134" column="23" lean-forward="true" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
+            <state relative-caret-position="3434">
+              <caret line="202" column="36" lean-forward="false" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
               <folding>
                 <element signature="e#0#47#0" expanded="true" />
-                <marker date="1505664055033" expanded="true" signature="5860:6094" ph="..." />
-                <marker date="1505664055033" expanded="true" signature="5875:6007" ph="..." />
-                <marker date="1505664055033" expanded="true" signature="5928:5991" ph="..." />
+                <marker date="1505755077011" expanded="true" signature="5955:6189" ph="..." />
+                <marker date="1505755077011" expanded="true" signature="5970:6102" ph="..." />
+                <marker date="1505755077011" expanded="true" signature="6023:6086" ph="..." />
               </folding>
             </state>
           </provider>
@@ -45,16 +44,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.component.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="product.component.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/product/product.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="479">
-              <caret line="183" column="140" lean-forward="false" selection-start-line="183" selection-start-column="140" selection-end-line="183" selection-end-column="140" />
+            <state relative-caret-position="510">
+              <caret line="60" column="24" lean-forward="true" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
               <folding>
                 <element signature="n#style#0;n#th#1;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#8;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#th#4;n#thead#0;n#table#0;n#div#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1505664074540" expanded="true" signature="8279:8357" ph="..." />
+                <marker date="1505755715493" expanded="true" signature="8258:8336" ph="..." />
               </folding>
             </state>
           </provider>
@@ -90,11 +89,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="product.component.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="product.component.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/product/product.component.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+            <state relative-caret-position="292">
+              <caret line="100" column="9" lean-forward="false" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user-component.component.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="user-component.component.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="33" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -181,10 +200,10 @@
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/app/product/lib.js" />
         <option value="$PROJECT_DIR$/src/app/product/app.js" />
-        <option value="$PROJECT_DIR$/src/app/product/product.component.css" />
         <option value="$PROJECT_DIR$/src/app/product/datetimepickerDirective.js" />
         <option value="$PROJECT_DIR$/src/app/product/product.component.ts" />
         <option value="$PROJECT_DIR$/src/app/product/product.component.html" />
+        <option value="$PROJECT_DIR$/src/app/product/product.component.css" />
       </list>
     </option>
   </component>
@@ -219,7 +238,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -420,8 +439,8 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -897,6 +916,7 @@
       <workItem from="1504796128772" duration="472000" />
       <workItem from="1505404711559" duration="2098000" />
       <workItem from="1505573157112" duration="6619000" />
+      <workItem from="1505751764559" duration="2980000" />
     </task>
     <task id="LOCAL-00001" summary="first commit&#10;import bootstrap jquery&#10;create angularfire2 component (not finish)">
       <created>1500225491003</created>
@@ -923,7 +943,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159860000" />
+    <option name="totallyTimeSpent" value="162840000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -944,7 +964,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2489339" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25159913" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1892,21 +1912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/app.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -1927,7 +1932,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="33" lean-forward="false" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1964,6 +1968,9 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/product/lib.js" />
+    <entry file="file://$PROJECT_DIR$/src/app/product/app.js" />
+    <entry file="file://$PROJECT_DIR$/src/app/product/datetimepickerDirective.js" />
     <entry file="file://$PROJECT_DIR$/src/app/product/product.component.spec.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -1972,61 +1979,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/product/lib.js">
+    <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="454">
-          <caret line="164" column="40" lean-forward="false" selection-start-line="164" selection-start-column="40" selection-end-line="164" selection-end-column="40" />
+        <state relative-caret-position="357">
+          <caret line="21" column="15" lean-forward="false" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/product/app.js">
+    <entry file="file://$PROJECT_DIR$/src/app/user-component/user-component.component.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="5" lean-forward="false" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
+        <state relative-caret-position="306">
+          <caret line="18" column="0" lean-forward="false" selection-start-line="18" selection-start-column="0" selection-end-line="33" selection-end-column="5" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/product/product.component.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="64" column="0" lean-forward="false" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/product/datetimepickerDirective.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
-          <caret line="63" column="5" lean-forward="false" selection-start-line="63" selection-start-column="5" selection-end-line="63" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/product/product.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="410">
-          <caret line="134" column="23" lean-forward="true" selection-start-line="134" selection-start-column="23" selection-end-line="134" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#47#0" expanded="true" />
-            <marker date="1505664055033" expanded="true" signature="5860:6094" ph="..." />
-            <marker date="1505664055033" expanded="true" signature="5875:6007" ph="..." />
-            <marker date="1505664055033" expanded="true" signature="5928:5991" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/product/product.component.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="183" column="140" lean-forward="false" selection-start-line="183" selection-start-column="140" selection-end-line="183" selection-end-column="140" />
+        <state relative-caret-position="510">
+          <caret line="60" column="24" lean-forward="true" selection-start-line="60" selection-start-column="24" selection-end-line="60" selection-end-column="24" />
           <folding>
             <element signature="n#style#0;n#th#1;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#8;n#thead#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#th#4;n#thead#0;n#table#0;n#div#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#div#0;n#div#0;n#div#0;n#div#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1505664074540" expanded="true" signature="8279:8357" ph="..." />
+            <marker date="1505755715493" expanded="true" signature="8258:8336" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/product/product.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3434">
+          <caret line="202" column="36" lean-forward="false" selection-start-line="202" selection-start-column="36" selection-end-line="202" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#47#0" expanded="true" />
+            <marker date="1505755077011" expanded="true" signature="5955:6189" ph="..." />
+            <marker date="1505755077011" expanded="true" signature="5970:6102" ph="..." />
+            <marker date="1505755077011" expanded="true" signature="6023:6086" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/product/product.component.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="100" column="9" lean-forward="false" selection-start-line="100" selection-start-column="9" selection-end-line="100" selection-end-column="9" />
+          <folding />
         </state>
       </provider>
     </entry>
