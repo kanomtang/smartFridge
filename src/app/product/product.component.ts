@@ -145,12 +145,12 @@ export class ProductComponent {
 
   addLot(): Lot {
     try {
-      this.num = Number(this.date.slice(8, 10));
-      this.datetime = this.num + '/';
-      this.num = Number(this.date.slice(5, 7));
-      this.datetime = this.datetime + this.num + '/';
-      this.num = Number(this.date.slice(0, 4));
-      this.datetime = this.datetime + this.num;
+      // this.num = Number(this.date.slice(8, 10));
+      // this.datetime = this.num + '/';
+      // this.num = Number(this.date.slice(5, 7));
+      // this.datetime = this.datetime + this.num + '/';
+      // this.num = Number(this.date.slice(0, 4));
+      // this.datetime = this.datetime + this.num;
       this.lots.push({
         'productID': this.lotModel.productID,
         'lotID': this.lotModel.lotID + this.datetime,
@@ -165,6 +165,59 @@ export class ProductComponent {
       console.log(err.message);
       return null;
     }
+  }
+
+  updateLot(): boolean {
+    let isExist = false;
+    let lotKey = '';
+    let lotAmount = '';
+    this.num = Number(this.date.slice(8, 10));
+    this.datetime = this.num + '/';
+    this.num = Number(this.date.slice(5, 7));
+    this.datetime = this.datetime + this.num + '/';
+    this.num = Number(this.date.slice(0, 4));
+    this.datetime = this.datetime + this.num;
+
+    this.lots.subscribe(lots => {
+      // items is an array
+      lots.forEach(lot => {
+        //console.log('Lot:', lot);
+        if(this.datetime == lot.expiryDate) {
+          isExist = true;
+          lotKey = lot.$key;
+          lotAmount = lot.amount + this.lotModel.amount;
+          console.log('key:', lotKey);
+        }
+      });
+
+    });
+    if(isExist){
+      try{
+        const pathFirebase = 'Lots/' + lotKey;
+        this.af.object(pathFirebase)
+          .update({'amount': lotAmount})
+          .then(() => alert('Successful for Updating Lot'));
+      }catch (err) {
+        console.log(err.message);
+        return false;
+      }
+    }else{
+      this.addLot();
+    }
+
+      // if(this.datetime == element[].expiryDate){
+      //   isExist = true;
+      //   const pathFirebase = 'Lots/' + element.keys();
+        // this.af.object(pathFirebase)
+        //   .update({'Price': this.model.Price,
+        //     'ProductName': this.model.ProductName,
+        //     'LastUpdate' : this.model.LastUpdate = this.datetime,
+        //     'InUse': this.model.InUse} )
+        //   .then(() => alert('Successful for Updating '));
+        // return this.model;
+      // }
+
+   return false;
   }
 
   keyToDeleteLot(keyparam: string): string {
