@@ -32,7 +32,10 @@ export class ProductComponent {
     console.log(this.items);
     this.lots = af.list('/Lots');
     console.log(this.lots);
+
     this.date = this.getCurrentDate();
+
+
   }
   getList(): FirebaseListObservable<ProductItem[]> {
     return this.items;
@@ -145,13 +148,25 @@ export class ProductComponent {
 
   addLot(): Lot {
     try {
-      // this.num = Number(this.date.slice(8, 10));
-      // this.datetime = this.num + '/';
-      // this.num = Number(this.date.slice(5, 7));
-      // this.datetime = this.datetime + this.num + '/';
-      // this.num = Number(this.date.slice(0, 4));
-      // this.datetime = this.datetime + this.num;
-      this.lots.push({
+      this.num = Number(this.date.slice(8, 10));
+      this.datetime = this.num + '/';
+      this.num = Number(this.date.slice(5, 7));
+      this.datetime = this.datetime + this.num + '/';
+      this.num = Number(this.date.slice(0, 4));
+      this.datetime = this.datetime + this.num;
+
+      // this.lots.push({
+      //   'productID': this.lotModel.productID,
+      //   'lotID': this.lotModel.lotID + this.datetime,
+      //   'expiryDate': this.datetime,
+      //   'amount' : this.lotModel.amount
+      // })
+      //   .then(
+      //     () => alert('Successful for adding new lot')
+      //
+      //   );
+
+        this.lots.push({
         'productID': this.lotModel.productID,
         'lotID': this.lotModel.lotID + this.datetime,
         'expiryDate': this.datetime,
@@ -159,7 +174,11 @@ export class ProductComponent {
       })
         .then(
           () => alert('Successful for adding new lot')
+
         );
+
+      console.log(this.lotModel);
+
       return this.lotModel;
     }catch (err) {
       console.log(err.message);
@@ -251,12 +270,15 @@ export class ProductComponent {
     return this.lotModel;
   }
 
-  qenerateQRcode(lot: Lot) {
+
+
+  qenerateQRcode(lot: Lot): string {
     this.lotModel = Object.assign({}, lot);
     this.value = this.lotModel.lotID;
+    return this.value;
   }
 
-  print(): void {
+  print(): boolean {
     let printContents, popupWin;
     printContents = document.getElementById('print-section').innerHTML;
     popupWin = window.open('', '_blank', 'top=0,left=0,height=100%,width=auto');
@@ -273,6 +295,7 @@ export class ProductComponent {
       </html>`
     );
     popupWin.document.close();
+    return true;
   }
 
   getCurrentDate(): string {
