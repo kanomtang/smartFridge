@@ -9,37 +9,38 @@ import {Lot} from '../shared/Lot';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input() private Productanditem: ProductItem;
-  private elementType: 'url' | 'canvas' | 'img' = 'url';
-  private value = 'Turtle';
-  private items: FirebaseListObservable<any[]>;
-  private lots: FirebaseListObservable<any[]>;
-  private model = new ProductItem();
-  private currentDate = new Date();
-  private datetime: string;
-  private editKey: string;
-  private deleteKey: string;
-  private deleteLotKey: string;
-  private lotModel = new Lot();
-  private date: string;
-  private num: number;
+  @Input() private _Productanditem: ProductItem;
+  private _elementType: 'url' | 'canvas' | 'img' = 'url';
+  private _value = 'Turtle';
+  private _items: FirebaseListObservable<any[]>;
+  private _lots: FirebaseListObservable<any[]>;
+  private _model = new ProductItem();
+  private _currentDate = new Date();
+  private _datetime: string;
+  private _editKey: string;
+  private _deleteKey: string;
+  private _deleteLotKey: string;
+  private _lotModel = new Lot();
+  private _date: string;
+  private _num: number;
+
 
   constructor(private af: AngularFireDatabase) {
-    this.items = af.list('/ProductInfo');
-    console.log(this.items);
-    this.lots = af.list('/Lots');
-    console.log(this.lots);
+    this._items = af.list('/ProductInfo');
+    console.log(this._items);
+    this._lots = af.list('/Lots');
+    console.log(this._lots);
 
-    this.date = this.getCurrentDate();
+    this._date = this.getCurrentDate();
 
 
   }
   getList(): FirebaseListObservable<ProductItem[]> {
-    return this.items;
+    return this._items;
   }
 
   keyToDelete(keyparam: string): string {
-    this.deleteKey = keyparam;
+    this._deleteKey = keyparam;
     return keyparam;
   }
 
@@ -48,7 +49,7 @@ export class ProductComponent {
     // the first slot is path or child
     // the second is key
     try {
-      const pathFirebase = 'ProductInfo/' + this.deleteKey;
+      const pathFirebase = 'ProductInfo/' + this._deleteKey;
       this.af.object(pathFirebase)
         .remove()
         .then(() => alert('Successful for deleting product'));
@@ -60,29 +61,30 @@ export class ProductComponent {
   }
 
   keyToEdit(keyparam: string, item: ProductItem): string {
-    this.editKey = keyparam;
-    this.model = Object.assign({}, item);
-    console.log(this.model);
+    this._editKey = keyparam;
+    this._model = Object.assign({}, item);
+    console.log(this._model);
     return keyparam;
   }
 
   updateItem(): ProductItem {
     // this.af.object('Item/{key}').update({'name': 'Jasmine' } );
     try {
-      this.datetime = this.currentDate.getDate() + '/'
-        + (this.currentDate.getMonth() + 1 ) + '/'
-        + this.currentDate.getFullYear() + ' @ '
-        + this.currentDate.getHours() + ':'
-        + this.currentDate.getMinutes() + ':'
-        + this.currentDate.getSeconds();
-      const pathFirebase = 'ProductInfo/' + this.editKey;
+      this._datetime = this._currentDate.getDate() + '/'
+        + (this._currentDate.getMonth() + 1 ) + '/'
+        + this._currentDate.getFullYear() + ' @ '
+        + this._currentDate.getHours() + ':'
+        + this._currentDate.getMinutes() + ':'
+        + this._currentDate.getSeconds();
+      const pathFirebase = 'ProductInfo/' + this._editKey;
       this.af.object(pathFirebase)
-        .update({'Price': this.model.Price,
-          'ProductName': this.model.ProductName,
-          'LastUpdate' : this.model.LastUpdate = this.datetime,
-          'InUse': this.model.InUse} )
+        .update({'Price': this._model.Price,
+          'ProductName': this._model.ProductName,
+          'LastUpdate' : this._model.LastUpdate = this._datetime,
+          'InUse': this._model.InUse} )
         .then(() => alert('Successful for Updating '));
-      return this.model;
+
+      return this._model;
     }catch (err) {
       console.log(err.message);
       return null;
@@ -92,23 +94,23 @@ export class ProductComponent {
   addItem(): ProductItem {
     //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
     try {
-      this.datetime = this.currentDate.getDate() + '/'
-        + (this.currentDate.getMonth() + 1 ) + '/'
-        + this.currentDate.getFullYear() + ' @ '
-        + this.currentDate.getHours() + ':'
-        + this.currentDate.getMinutes() + ':'
-        + this.currentDate.getSeconds();
-      this.items.push({
-        'InUse': this.model.InUse = true,
-        'Price': this.model.Price,
-        'ProductName': this.model.ProductName,
-        'CreatedDate': this.model.CreatedDate = this.datetime,
-        'LastUpdate' : this.model.LastUpdate = this.datetime
+      this._datetime = this._currentDate.getDate() + '/'
+        + (this._currentDate.getMonth() + 1 ) + '/'
+        + this._currentDate.getFullYear() + ' @ '
+        + this._currentDate.getHours() + ':'
+        + this._currentDate.getMinutes() + ':'
+        + this._currentDate.getSeconds();
+      this._items.push({
+        'InUse': this._model.InUse = true,
+        'Price': this._model.Price,
+        'ProductName': this._model.ProductName,
+        'CreatedDate': this._model.CreatedDate = this._datetime,
+        'LastUpdate' : this._model.LastUpdate = this._datetime
       })
         .then(
           () => alert('Successful for adding new item')
         );
-      return this.model;
+      return this._model;
     }catch (err) {
       console.log(err.message);
       return null;
@@ -116,7 +118,7 @@ export class ProductComponent {
   }
 
   isEmpty(): boolean {
-    if (this.model.ProductName && this.model.Price) {
+    if (this._model.ProductName && this._model.Price) {
       return false;
     }else {
       return true;
@@ -125,18 +127,18 @@ export class ProductComponent {
   }
 
   clearData(): ProductItem {
-    this.model = Object.assign({}, null);
-    return this.model;
+    this._model = Object.assign({}, null);
+    return this._model;
   }
 
   //Progress2
 
   getLotList(): FirebaseListObservable<Lot[]> {
-    return this.lots;
+    return this._lots;
   }
 
   amountEmpty(): boolean {
-    if (this.lotModel.amount) {
+    if (this._lotModel.amount) {
       return false;
     }else{
       return true;
@@ -144,46 +146,49 @@ export class ProductComponent {
   }
 
   isNotPositiveAmount(): boolean {
-    return this.lotModel.amount <= 0;
+    return this._lotModel.amount <= 0;
   }
 
   isNotPositivePrice(): boolean {
-    return this.model.Price <= 0;
+    return this._model.Price <= 0;
   }
 
 
   keyToAddLot(keyparam: string, item: ProductItem): string {
-    this.lotModel.productID = keyparam;
-    this.lotModel.lotID = item.ProductName + ',' + item.Price + ',';
+    this._lotModel.productID = keyparam;
+    this._lotModel.lotID = item.ProductName + ',' + item.Price + ',';
     return keyparam;
   }
 
   addLot(): Lot {
     try {
-      this.num = Number(this.date.slice(8, 10));
-      this.datetime = this.num + '/';
-      this.num = Number(this.date.slice(5, 7));
-      this.datetime = this.datetime + this.num + '/';
-      this.num = Number(this.date.slice(0, 4));
-      this.datetime = this.datetime + this.num;
+      this._num = Number(this._date.slice(8, 10));
+      this._datetime = this._num + '/';
+      this._num = Number(this._date.slice(5, 7));
+      this._datetime = this._datetime + this._num + '/';
+      this._num = Number(this._date.slice(0, 4));
+      this._datetime = this._datetime + this._num;
 
-        this.lots.push({
-        'productID': this.lotModel.productID,
-        'lotID': this.lotModel.lotID + this.datetime,
-        'expiryDate': this.datetime,
-        'amount' : this.lotModel.amount
+        this._lots.push({
+        'productID': this._lotModel.productID,
+        'lotID': this._lotModel.lotID + this._datetime,
+        'expiryDate': this._datetime,
+        'amount' : this._lotModel.amount
       })
         .then(
           () => alert('Successful for adding new lot')
 
         );
 
-      console.log(this.lotModel);
 
-      return this.lotModel;
+
+
+      return this._lotModel;
+
     }catch (err) {
       console.log(err.message);
       return null;
+
     }
   }
 
@@ -191,21 +196,21 @@ export class ProductComponent {
     let isExist = false;
     let lotKey = '';
     let lotAmount = '';
-    this.num = Number(this.date.slice(8, 10));
-    this.datetime = this.num + '/';
-    this.num = Number(this.date.slice(5, 7));
-    this.datetime = this.datetime + this.num + '/';
-    this.num = Number(this.date.slice(0, 4));
-    this.datetime = this.datetime + this.num;
+    this._num = Number(this._date.slice(8, 10));
+    this._datetime = this._num + '/';
+    this._num = Number(this._date.slice(5, 7));
+    this._datetime = this._datetime + this._num + '/';
+    this._num = Number(this._date.slice(0, 4));
+    this._datetime = this._datetime + this._num;
 
-    this.lots.subscribe(lots => {
+    this._lots.subscribe(lots => {
       // items is an array
       lots.forEach(lot => {
         //console.log('Lot:', lot);
-        if(this.datetime == lot.expiryDate) {
+        if(this._datetime == lot.expiryDate) {
           isExist = true;
           lotKey = lot.$key;
-          lotAmount = lot.amount + this.lotModel.amount;
+          lotAmount = lot.amount + this._lotModel.amount;
           console.log('key:', lotKey);
         }
       });
@@ -217,9 +222,10 @@ export class ProductComponent {
         this.af.object(pathFirebase)
           .update({'amount': lotAmount})
           .then(() => alert('Successful for Updating Lot'));
+
       }catch (err) {
         console.log(err.message);
-        return this.lotModel;
+        return this._lotModel;
       }
     }else{
       return this.addLot();
@@ -239,7 +245,7 @@ export class ProductComponent {
   }
 
   keyToDeleteLot(keyparam: string): string {
-    this.deleteLotKey = keyparam;
+    this._deleteLotKey = keyparam;
     return keyparam;
   }
 
@@ -248,7 +254,7 @@ export class ProductComponent {
     // the first slot is path or child
     // the second is key
     try {
-      const pathFirebase = 'Lots/' + this.deleteLotKey;
+      const pathFirebase = 'Lots/' + this._deleteLotKey;
       this.af.object(pathFirebase)
         .remove()
         .then(() => alert('Successful for deleting lot'));
@@ -261,16 +267,16 @@ export class ProductComponent {
 
 
   clearLotData(): Lot {
-    this.lotModel = Object.assign({}, null);
-    return this.lotModel;
+    this._lotModel = Object.assign({}, null);
+    return this._lotModel;
   }
 
 
 
   qenerateQRcode(lot: Lot): string {
-    this.lotModel = Object.assign({}, lot);
-    this.value = this.lotModel.lotID;
-    return this.value;
+    this._lotModel = Object.assign({}, lot);
+    this._value = this._lotModel.lotID;
+    return this._value;
   }
 
   print(): boolean {
@@ -294,17 +300,132 @@ export class ProductComponent {
   }
 
   getCurrentDate(): string {
-    this.datetime = this.currentDate.getFullYear() + '-';
-    if (this.currentDate.getMonth() + 1 < 10) {
-      this.datetime = this.datetime + '0' + (this.currentDate.getMonth() + 1) + '-';
+    this._datetime = this._currentDate.getFullYear() + '-';
+    if (this._currentDate.getMonth() + 1 < 10) {
+      this._datetime = this._datetime + '0' + (this._currentDate.getMonth() + 1) + '-';
     }else {
-      this.datetime = this.datetime + (this.currentDate.getMonth() + 1) + '-';
+      this._datetime = this._datetime + (this._currentDate.getMonth() + 1) + '-';
     }
-    if (this.currentDate.getDate() < 10) {
-      this.datetime = this.datetime + '0' + this.currentDate.getDate();
+    if (this._currentDate.getDate() < 10) {
+      this._datetime = this._datetime + '0' + this._currentDate.getDate();
     }else {
-      this.datetime = this.datetime + this.currentDate.getDate();
+      this._datetime = this._datetime + this._currentDate.getDate();
     }
-    return this.datetime;
+    return this._datetime;
   }
+  // getter setter
+
+
+  get Productanditem(): ProductItem {
+    return this._Productanditem;
+  }
+
+  set Productanditem(value: ProductItem) {
+    this._Productanditem = value;
+  }
+
+  get elementType() {
+    return this._elementType;
+  }
+
+  set elementType(value) {
+    this._elementType = value;
+  }
+
+  get value(): string {
+    return this._value;
+  }
+
+  set value(value: string) {
+    this._value = value;
+  }
+
+  get items(): FirebaseListObservable<any[]> {
+    return this._items;
+  }
+
+  set items(value: FirebaseListObservable<any[]>) {
+    this._items = value;
+  }
+
+  get lots(): FirebaseListObservable<any[]> {
+    return this._lots;
+  }
+
+  set lots(value: FirebaseListObservable<any[]>) {
+    this._lots = value;
+  }
+
+  get model(): ProductItem {
+    return this._model;
+  }
+
+  set model(value: ProductItem) {
+    this._model = value;
+  }
+
+  get currentDate(): Date {
+    return this._currentDate;
+  }
+
+  set currentDate(value: Date) {
+    this._currentDate = value;
+  }
+
+  get datetime(): string {
+    return this._datetime;
+  }
+
+  set datetime(value: string) {
+    this._datetime = value;
+  }
+
+  get editKey(): string {
+    return this._editKey;
+  }
+
+  set editKey(value: string) {
+    this._editKey = value;
+  }
+
+  get deleteKey(): string {
+    return this._deleteKey;
+  }
+
+  set deleteKey(value: string) {
+    this._deleteKey = value;
+  }
+
+  get deleteLotKey(): string {
+    return this._deleteLotKey;
+  }
+
+  set deleteLotKey(value: string) {
+    this._deleteLotKey = value;
+  }
+
+  get lotModel(): Lot {
+    return this._lotModel;
+  }
+
+  set lotModel(value: Lot) {
+    this._lotModel = value;
+  }
+
+  get date(): string {
+    return this._date;
+  }
+
+  set date(value: string) {
+    this._date = value;
+  }
+
+  get num(): number {
+    return this._num;
+  }
+
+  set num(value: number) {
+    this._num = value;
+  }
+
 }

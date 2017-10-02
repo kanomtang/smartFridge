@@ -1,3 +1,4 @@
+/*
 import {async, ComponentFixture, ComponentFixtureAutoDetect, TestBed} from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { LoginPageComponent } from './login-page.component';
@@ -43,3 +44,4 @@ describe('LoginPageComponent', () => {
 
 
 });
+*/

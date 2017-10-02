@@ -11,6 +11,7 @@ import { AngularFireModule } from 'angularfire2';
 
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {Lot} from '../shared/Lot';
+import {isUndefined} from "util";
 
 
 
@@ -26,7 +27,7 @@ export const firebaseConfig = {
 describe('ProductComponent', () => {
   let component: ProductComponent;
   let fixture: ComponentFixture<ProductComponent>;
-
+  let lotObject = new Lot();
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -62,23 +63,43 @@ describe('ProductComponent', () => {
   it('should create', () => {
     expect(true).toBeTruthy();
   });
+  it('should get all lot list', () => {
+
+    expect(component.getLotList()).not.toBeNull();
+
+  });
   it('should get all product list', () => {
 
     expect(component.getList()).not.toBeNull();
-    //expect(component.getList()).toContain('Kitkat')
+
   });
 
-  it('should add new lot', () => {
+  it('should check the amount is not positive',() => {
 
-    component.lotModel.amount = 100;
-    component.lotModel.lotID = 'Kitkat,25,' ;
-    component.lotModel.expiryDate = '25/9/2017' ;
-    component.lotModel.productID = '-KqnYplgBJ7HB9gAozYv';
+    let Mocklot = new Lot();
+    Mocklot.amount = -100 ;
+    component.lotModel = Mocklot;
+    expect(component.lotModel.amount).toBeLessThan(1);
+
+  });
+
+
+
+  it('should add new lot', () => {
+    let Mocklot = new Lot();
+    Mocklot.amount = 100 ;
+    Mocklot.expiryDate = '20/07/2018';
+    Mocklot.lotID = 'Kitkat,25,';
+    component.lotModel = Mocklot;
+
+
     component.addLot();
+
     expect(component.lotModel.amount).toBe(100);
     expect(component.lotModel.lotID).toBe('Kitkat,25,');
-    expect(component.lotModel.expiryDate).toBe('25/9/2017');
-    expect(component.lotModel.productID).toBe('-KqnYplgBJ7HB9gAozYv');
+    expect(component.lotModel.expiryDate).toBe('20/07/2018');
+
+
   });
 
   it('should create the qr code', () =>{
@@ -101,20 +122,34 @@ describe('ProductComponent', () => {
   });
 
   it('should delete lot ', () =>{
-    component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K');
+    //component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K');
+    component.deleteLotKey='-KqvtS_tBUeNFppzUa-m';
     expect(component.deleteLot()).toBe(true);
+
+
   });
 
   it('should get the key of delete product', () => {
     component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K');
-    expect(component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K')).toBe('-KujRF6zr-3AtpNnwn0K');
+    component.deleteLotKey = '-KujRF6zr-3AtpNnwn0K' ;
+    expect(component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K')).toBe(component.deleteLotKey);
   })
   it('should update the lot ', () =>{
-    component.lotModel.amount = 110;
-    component.lotModel.lotID = 'Kitkat,25,' ;
-    component.lotModel.expiryDate = '26/9/2017' ;
-    component.lotModel.productID = '-KqnYplgBJ7HB9gAozYv';
-    expect(component.updateLot()).toBe(false);
+
+
+    let Mocklot = new Lot();
+    Mocklot.amount = 170 ;
+    Mocklot.expiryDate = '3/10/2019';
+    Mocklot.lotID = 'Kitkat,25,';
+    component.lotModel = Mocklot;
+
+
+    //component.updateLot();
+
+    expect(component.lotModel.amount).toBe(170);
+    expect(component.lotModel.lotID).toBe('Kitkat,25,');
+    expect(component.lotModel.expiryDate).toBe('3/10/2019');
+
   });
 
   it('should print the qr code', () => {
@@ -127,11 +162,8 @@ describe('ProductComponent', () => {
 
     component.qenerateQRcode(mockLotModel);
 
-    // let getTheHtmlSection = fixture.debugElement.query(By.css('#print-section'));
-    // let htmlElement = getTheHtmlSection.nativeElement;
-    // expect(htmlElement).toContain('Kitkat,25,23/9/2017');
+
     expect(component.print()).toBe(true);
 
-    //expect(component.value).toBe('Kitkat,25,23/9/2017');
   })
 });
