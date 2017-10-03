@@ -12,6 +12,7 @@ export class ProductComponent {
   @Input() private _Productanditem: ProductItem;
   private _elementType: 'url' | 'canvas' | 'img' = 'url';
   private _value = 'Turtle';
+  private _value2 = '---';
   private _items: FirebaseListObservable<any[]>;
   private _lots: FirebaseListObservable<any[]>;
   private _model = new ProductItem();
@@ -30,7 +31,6 @@ export class ProductComponent {
     console.log(this._items);
     this._lots = af.list('/Lots');
     console.log(this._lots);
-
     this._date = this.getCurrentDate();
 
 
@@ -156,7 +156,7 @@ export class ProductComponent {
 
   keyToAddLot(keyparam: string, item: ProductItem): string {
     this._lotModel.productID = keyparam;
-    this._lotModel.lotID = item.ProductName + ',' + item.Price + ',';
+    this._lotModel.qrCode = item.ProductName + ',' + item.Price + ',';
     return keyparam;
   }
 
@@ -168,11 +168,11 @@ export class ProductComponent {
       this._datetime = this._datetime + this._num + '/';
       this._num = Number(this._date.slice(0, 4));
       this._datetime = this._datetime + this._num;
-
+      this._lotModel.expiryDate = this._datetime;
         this._lots.push({
         'productID': this._lotModel.productID,
-        'lotID': this._lotModel.lotID + this._datetime,
-        'expiryDate': this._datetime,
+        'qrCode': this._lotModel.qrCode + this._datetime,
+        'expiryDate': this._lotModel.expiryDate,
         'amount' : this._lotModel.amount
       })
         .then(
@@ -195,7 +195,7 @@ export class ProductComponent {
   updateLot(): Lot {
     let isExist = false;
     let lotKey = '';
-    let lotAmount = '';
+    let lotAmount = 0;
     this._num = Number(this._date.slice(8, 10));
     this._datetime = this._num + '/';
     this._num = Number(this._date.slice(5, 7));
@@ -217,10 +217,11 @@ export class ProductComponent {
 
     });
     if(isExist){
+      this._lotModel.amount = lotAmount;
       try{
         const pathFirebase = 'Lots/' + lotKey;
         this.af.object(pathFirebase)
-          .update({'amount': lotAmount})
+          .update({'amount': this._lotModel.amount})
           .then(() => alert('Successful for Updating Lot'));
 
       }catch (err) {
@@ -275,7 +276,10 @@ export class ProductComponent {
 
   qenerateQRcode(lot: Lot): string {
     this._lotModel = Object.assign({}, lot);
-    this._value = this._lotModel.lotID;
+    console.log(lot);
+    this._value = this._lotModel.qrCode;
+    this._value2 = this._lotModel.expiryDate;
+    console.log(this._value2 );
     return this._value;
   }
 
@@ -339,6 +343,15 @@ export class ProductComponent {
   set value(value: string) {
     this._value = value;
   }
+
+  get value2(): string {
+    return this._value;
+  }
+
+  set value2(value: string) {
+    this._value = value;
+  }
+
 
   get items(): FirebaseListObservable<any[]> {
     return this._items;

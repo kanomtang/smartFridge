@@ -3,7 +3,8 @@
  */
 export class Lot {
   productID: string;
-  lotID: string;
+  // lotID: string;
+  qrCode: string;
   amount: number;
   expiryDate: string;
 }
