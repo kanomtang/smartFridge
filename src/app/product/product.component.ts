@@ -25,7 +25,7 @@ export class ProductComponent {
   private _date: string;
   private _num: number;
 
-
+  private _keyofnewproduct :any;
   constructor(private af: AngularFireDatabase) {
     this._items = af.list('/ProductInfo');
     console.log(this._items);
@@ -190,6 +190,33 @@ export class ProductComponent {
       return null;
 
     }
+    // pocky code get key
+    // try {
+    //   this._num = Number(this._date.slice(8, 10));
+    //   this._datetime = this._num + '/';
+    //   this._num = Number(this._date.slice(5, 7));
+    //   this._datetime = this._datetime + this._num + '/';
+    //   this._num = Number(this._date.slice(0, 4));
+    //   this._datetime = this._datetime + this._num;
+    //   this._lotModel.expiryDate = this._datetime;
+    //   let getkey= this._lots.push({
+    //     'productID': this._lotModel.productID,
+    //     'qrCode': this._lotModel.qrCode + this._datetime,
+    //     'expiryDate': this._lotModel.expiryDate,
+    //     'amount' : this._lotModel.amount
+    //   });
+    //   this.keyofnewproduct = getkey;
+    //
+    //
+    //
+    //   console.log(this.keyofnewproduct);
+    //   return this._lotModel;
+    //
+    // }catch (err) {
+    //   console.log(err.message);
+    //   return null;
+    //
+    // }
   }
 
   updateLot(): Lot {
@@ -441,4 +468,12 @@ export class ProductComponent {
     this._num = value;
   }
 
+
+  get keyofnewproduct(): any {
+    return this._keyofnewproduct;
+  }
+
+  set keyofnewproduct(value: any) {
+    this._keyofnewproduct = value;
+  }
 }
