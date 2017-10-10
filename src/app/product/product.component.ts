@@ -24,8 +24,8 @@ export class ProductComponent {
   private _lotModel = new Lot();
   private _date: string;
   private _num: number;
-
   private _keyofnewproduct :any;
+
   constructor(private af: AngularFireDatabase) {
     this._items = af.list('/ProductInfo');
     console.log(this._items);
@@ -52,7 +52,7 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this._deleteKey;
       this.af.object(pathFirebase)
         .remove()
-        .then(() => alert('Successful for deleting product'));
+        // .then(() => alert('Successful for deleting product'));
       return true;
     }catch (err) {
       console.log(err.message);
@@ -92,28 +92,54 @@ export class ProductComponent {
   }
 
   addItem(): ProductItem {
-    //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
-    try {
-      this._datetime = this._currentDate.getDate() + '/'
-        + (this._currentDate.getMonth() + 1 ) + '/'
-        + this._currentDate.getFullYear() + ' @ '
-        + this._currentDate.getHours() + ':'
-        + this._currentDate.getMinutes() + ':'
-        + this._currentDate.getSeconds();
-      this._items.push({
-        'InUse': this._model.InUse = true,
-        'Price': this._model.Price,
-        'ProductName': this._model.ProductName,
-        'CreatedDate': this._model.CreatedDate = this._datetime,
-        'LastUpdate' : this._model.LastUpdate = this._datetime
-      })
-        .then(
-          () => alert('Successful for adding new item')
-        );
-      return this._model;
-    }catch (err) {
-      console.log(err.message);
+    let notExist = false;
+    if(this.isEmpty()){
+      console.log("empty field");
+      alert("Please fill every fields");
       return null;
+    }else if(this.isNotPositivePrice()){
+      alert("Price must be a positive number");
+      return null;
+    }else{
+      this._items.subscribe(items => {
+        // items is an array
+        items.forEach(item => {
+          //console.log('Item:', item);
+          if(this._model.ProductName == item.ProductName) {
+            notExist = false;
+            console.log('name:', item.ProductName);
+            alert("This name is already exist");
+          }
+        });
+      });
+
+      if(notExist){
+        //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
+        try {
+          this._datetime = this._currentDate.getDate() + '/'
+            + (this._currentDate.getMonth() + 1 ) + '/'
+            + this._currentDate.getFullYear() + ' @ '
+            + this._currentDate.getHours() + ':'
+            + this._currentDate.getMinutes() + ':'
+            + this._currentDate.getSeconds();
+          this._items.push({
+            'InUse': this._model.InUse = true,
+            'Price': this._model.Price,
+            'ProductName': this._model.ProductName,
+            'CreatedDate': this._model.CreatedDate = this._datetime,
+            'LastUpdate' : this._model.LastUpdate = this._datetime
+          })
+            .then(
+              () => alert('Successful for adding new item')
+            );
+          this.clearData();
+          return this._model;
+        }catch (err) {
+          console.log(err.message);
+          return null;
+        }
+      }
+
     }
   }
 
@@ -123,7 +149,6 @@ export class ProductComponent {
     }else {
       return true;
     }
-    // return true;
   }
 
   clearData(): ProductItem {
@@ -179,10 +204,6 @@ export class ProductComponent {
           () => alert('Successful for adding new lot')
 
         );
-
-
-
-
       return this._lotModel;
 
     }catch (err) {

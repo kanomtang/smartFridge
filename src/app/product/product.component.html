@@ -144,10 +144,13 @@
           <label for="addPrice">Price</label>
           <input id="addPrice" class="form-control " type="number" min="0" step="1" [(ngModel)]="model.Price">
           <p class="inform">Must be a number and not negative</p>
+
         </div>
       </div>
       <div class="modal-footer ">
-        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="addItem()" [disabled]="isEmpty() || isNotPositivePrice()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <button type="button" class="btn btn-success" (click)="addItem()" ><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <!--style="width: 100%;"  [disabled]="isEmpty() || isNotPositivePrice()"-->
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
       </div>
     </div>
     <!-- /.modal-content -->
