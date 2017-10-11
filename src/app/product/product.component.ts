@@ -2,6 +2,7 @@ import {Component, Input} from '@angular/core';
 import {AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable} from 'angularfire2/database';
 import {ProductItem} from '../shared/ProductItem';
 import {Lot} from '../shared/Lot';
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-product',
@@ -25,6 +26,7 @@ export class ProductComponent {
   private _date: string;
   private _num: number;
   private _keyofnewproduct :any;
+  private subscription: Subscription;
 
   constructor(private af: AngularFireDatabase) {
     this._items = af.list('/ProductInfo');
@@ -92,16 +94,17 @@ export class ProductComponent {
   }
 
   addItem(): ProductItem {
+    //validate the correctness before adding item
     let notExist = false;
     if(this.isEmpty()){
       console.log("empty field");
-      alert("Please fill every fields");
+      alert("Please don't leave the field blank");
       return null;
     }else if(this.isNotPositivePrice()){
       alert("Price must be a positive number");
       return null;
     }else{
-      this._items.subscribe(items => {
+      this.subscription = this._items.subscribe(items => {
         // items is an array
         items.forEach(item => {
           //console.log('Item:', item);
@@ -112,6 +115,7 @@ export class ProductComponent {
           }
         });
       });
+      this.subscription.unsubscribe();
 
       if(notExist){
         //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
@@ -202,95 +206,63 @@ export class ProductComponent {
       })
         .then(
           () => alert('Successful for adding new lot')
-
         );
+        this.clearLotData();
       return this._lotModel;
-
     }catch (err) {
       console.log(err.message);
       return null;
-
     }
-    // pocky code get key
-    // try {
-    //   this._num = Number(this._date.slice(8, 10));
-    //   this._datetime = this._num + '/';
-    //   this._num = Number(this._date.slice(5, 7));
-    //   this._datetime = this._datetime + this._num + '/';
-    //   this._num = Number(this._date.slice(0, 4));
-    //   this._datetime = this._datetime + this._num;
-    //   this._lotModel.expiryDate = this._datetime;
-    //   let getkey= this._lots.push({
-    //     'productID': this._lotModel.productID,
-    //     'qrCode': this._lotModel.qrCode + this._datetime,
-    //     'expiryDate': this._lotModel.expiryDate,
-    //     'amount' : this._lotModel.amount
-    //   });
-    //   this.keyofnewproduct = getkey;
-    //
-    //
-    //
-    //   console.log(this.keyofnewproduct);
-    //   return this._lotModel;
-    //
-    // }catch (err) {
-    //   console.log(err.message);
-    //   return null;
-    //
-    // }
   }
 
   updateLot(): Lot {
     let isExist = false;
     let lotKey = '';
     let lotAmount = 0;
-    this._num = Number(this._date.slice(8, 10));
-    this._datetime = this._num + '/';
-    this._num = Number(this._date.slice(5, 7));
-    this._datetime = this._datetime + this._num + '/';
-    this._num = Number(this._date.slice(0, 4));
-    this._datetime = this._datetime + this._num;
-
-    this._lots.subscribe(lots => {
-      // items is an array
-      lots.forEach(lot => {
-        //console.log('Lot:', lot);
-        if(this._datetime == lot.expiryDate) {
-          isExist = true;
-          lotKey = lot.$key;
-          lotAmount = lot.amount + this._lotModel.amount;
-          console.log('key:', lotKey);
-        }
-      });
-
-    });
-    if(isExist){
-      this._lotModel.amount = lotAmount;
-      try{
-        const pathFirebase = 'Lots/' + lotKey;
-        this.af.object(pathFirebase)
-          .update({'amount': this._lotModel.amount})
-          .then(() => alert('Successful for Updating Lot'));
-
-      }catch (err) {
-        console.log(err.message);
-        return this._lotModel;
-      }
+    if(this.amountEmpty()){
+      console.log("empty field");
+      alert("Please don't leave the field blank");
+      return null;
+    }else if(this.isNotPositiveAmount()){
+      alert("Amount must be a positive number");
+      return null;
     }else{
-      return this.addLot();
-    }
+      this._num = Number(this._date.slice(8, 10));
+      this._datetime = this._num + '/';
+      this._num = Number(this._date.slice(5, 7));
+      this._datetime = this._datetime + this._num + '/';
+      this._num = Number(this._date.slice(0, 4));
+      this._datetime = this._datetime + this._num;
+      this.subscription = this._lots.subscribe(lots => {
+        // items is an array
+        lots.forEach(lot => {
+          //console.log('Lot:', lot);
+          if(this._datetime == lot.expiryDate) {
+            isExist = true;
+            lotKey = lot.$key;
+            lotAmount = lot.amount + this._lotModel.amount;
+            console.log('key:', lotKey);
+          }
+        });
+      });
+      this.subscription.unsubscribe();
 
-      // if(this.datetime == element[].expiryDate){
-      //   isExist = true;
-      //   const pathFirebase = 'Lots/' + element.keys();
-        // this.af.object(pathFirebase)
-        //   .update({'Price': this.model.Price,
-        //     'ProductName': this.model.ProductName,
-        //     'LastUpdate' : this.model.LastUpdate = this.datetime,
-        //     'InUse': this.model.InUse} )
-        //   .then(() => alert('Successful for Updating '));
-        // return this.model;
-      // }
+      if(isExist){
+        this._lotModel.amount = lotAmount;
+        try{
+          const pathFirebase = 'Lots/' + lotKey;
+          this.af.object(pathFirebase)
+            .update({'amount': this._lotModel.amount})
+            .then(() => alert('Successful for Updating Lot'));
+          this.clearLotData();
+        }catch (err) {
+          console.log(err.message);
+          return this._lotModel;
+        }
+      }else{
+        return this.addLot();
+      }
+    }
   }
 
   keyToDeleteLot(keyparam: string): string {
@@ -306,7 +278,7 @@ export class ProductComponent {
       const pathFirebase = 'Lots/' + this._deleteLotKey;
       this.af.object(pathFirebase)
         .remove()
-        .then(() => alert('Successful for deleting lot'));
+        // .then(() => alert('Successful for deleting lot'));
       return true;
     }catch (err) {
       console.log(err.message);

@@ -82,7 +82,7 @@
       <div class="modal-body">
         <div class="form-group">
           <label for="editName">Name</label>
-          <input id="editName" class="form-control " type="text" [(ngModel)]="model.ProductName">
+          <input id="editName" class="form-control " type="text" [(ngModel)]="model.ProductName" disabled>
         </div>
         <div class="form-group">
           <label for="editPrice">Price</label>
@@ -183,7 +183,9 @@
         </div>
       </div>
       <div class="modal-footer ">
-        <button type="button" class="btn btn-success" style="width: 100%;" data-dismiss="modal" (click)="updateLot()" [disabled]="amountEmpty() || isNotPositiveAmount()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <button type="button" class="btn btn-success" (click)="updateLot()"><span class="glyphicon glyphicon-ok-sign"></span> Add</button>
+        <!-- style="width: 100%;" data-dismiss="modal" [disabled]="amountEmpty() || isNotPositiveAmount()"-->
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
       </div>
     </div>
 
