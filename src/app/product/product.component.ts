@@ -25,8 +25,10 @@ export class ProductComponent {
   private _lotModel = new Lot();
   private _date: string;
   private _num: number;
-  private _keyofnewproduct :any;
+  private _keyofnewproduct: any;
   private subscription: Subscription;
+
+
 
   constructor(private af: AngularFireDatabase) {
     this._items = af.list('/ProductInfo');
@@ -37,6 +39,7 @@ export class ProductComponent {
 
 
   }
+
   getList(): FirebaseListObservable<ProductItem[]> {
     return this._items;
   }
@@ -54,9 +57,9 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this._deleteKey;
       this.af.object(pathFirebase)
         .remove()
-        // .then(() => alert('Successful for deleting product'));
+      // .then(() => alert('Successful for deleting product'));
       return true;
-    }catch (err) {
+    } catch (err) {
       console.log(err.message);
       return false;
     }
@@ -80,14 +83,16 @@ export class ProductComponent {
         + this._currentDate.getSeconds();
       const pathFirebase = 'ProductInfo/' + this._editKey;
       this.af.object(pathFirebase)
-        .update({'Price': this._model.Price,
+        .update({
+          'Price': this._model.Price,
           'ProductName': this._model.ProductName,
-          'LastUpdate' : this._model.LastUpdate = this._datetime,
-          'InUse': this._model.InUse} )
+          'LastUpdate': this._model.LastUpdate = this._datetime,
+          'InUse': this._model.InUse
+        })
         .then(() => alert('Successful for Updating '));
 
       return this._model;
-    }catch (err) {
+    } catch (err) {
       console.log(err.message);
       return null;
     }
@@ -96,19 +101,19 @@ export class ProductComponent {
   addItem(): ProductItem {
     //validate the correctness before adding item
     let notExist = false;
-    if(this.isEmpty()){
+    if (this.isEmpty()) {
       console.log("empty field");
       alert("Please don't leave the field blank");
       return null;
-    }else if(this.isNotPositivePrice()){
+    } else if (this.isNotPositivePrice()) {
       alert("Price must be a positive number");
       return null;
-    }else{
+    } else {
       this.subscription = this._items.subscribe(items => {
         // items is an array
         items.forEach(item => {
           //console.log('Item:', item);
-          if(this._model.ProductName == item.ProductName) {
+          if (this._model.ProductName == item.ProductName) {
             notExist = false;
             console.log('name:', item.ProductName);
             alert("This name is already exist");
@@ -117,7 +122,7 @@ export class ProductComponent {
       });
       this.subscription.unsubscribe();
 
-      if(notExist){
+      if (notExist) {
         //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
         try {
           this._datetime = this._currentDate.getDate() + '/'
@@ -131,14 +136,14 @@ export class ProductComponent {
             'Price': this._model.Price,
             'ProductName': this._model.ProductName,
             'CreatedDate': this._model.CreatedDate = this._datetime,
-            'LastUpdate' : this._model.LastUpdate = this._datetime
+            'LastUpdate': this._model.LastUpdate = this._datetime
           })
             .then(
               () => alert('Successful for adding new item')
             );
           this.clearData();
           return this._model;
-        }catch (err) {
+        } catch (err) {
           console.log(err.message);
           return null;
         }
@@ -150,7 +155,7 @@ export class ProductComponent {
   isEmpty(): boolean {
     if (this._model.ProductName && this._model.Price) {
       return false;
-    }else {
+    } else {
       return true;
     }
   }
@@ -169,7 +174,7 @@ export class ProductComponent {
   amountEmpty(): boolean {
     if (this._lotModel.amount) {
       return false;
-    }else{
+    } else {
       return true;
     }
   }
@@ -198,18 +203,18 @@ export class ProductComponent {
       this._num = Number(this._date.slice(0, 4));
       this._datetime = this._datetime + this._num;
       this._lotModel.expiryDate = this._datetime;
-        this._lots.push({
+      this._lots.push({
         'productID': this._lotModel.productID,
         'qrCode': this._lotModel.qrCode + this._datetime,
         'expiryDate': this._lotModel.expiryDate,
-        'amount' : this._lotModel.amount
+        'amount': this._lotModel.amount
       })
         .then(
           () => alert('Successful for adding new lot')
         );
-        this.clearLotData();
+      this.clearLotData();
       return this._lotModel;
-    }catch (err) {
+    } catch (err) {
       console.log(err.message);
       return null;
     }
@@ -219,14 +224,14 @@ export class ProductComponent {
     let isExist = false;
     let lotKey = '';
     let lotAmount = 0;
-    if(this.amountEmpty()){
+    if (this.amountEmpty()) {
       console.log("empty field");
       alert("Please don't leave the field blank");
       return null;
-    }else if(this.isNotPositiveAmount()){
+    } else if (this.isNotPositiveAmount()) {
       alert("Amount must be a positive number");
       return null;
-    }else{
+    } else {
       this._num = Number(this._date.slice(8, 10));
       this._datetime = this._num + '/';
       this._num = Number(this._date.slice(5, 7));
@@ -237,7 +242,7 @@ export class ProductComponent {
         // items is an array
         lots.forEach(lot => {
           //console.log('Lot:', lot);
-          if(this._datetime == lot.expiryDate) {
+          if (this._datetime == lot.expiryDate) {
             isExist = true;
             lotKey = lot.$key;
             lotAmount = lot.amount + this._lotModel.amount;
@@ -247,19 +252,19 @@ export class ProductComponent {
       });
       this.subscription.unsubscribe();
 
-      if(isExist){
+      if (isExist) {
         this._lotModel.amount = lotAmount;
-        try{
+        try {
           const pathFirebase = 'Lots/' + lotKey;
           this.af.object(pathFirebase)
             .update({'amount': this._lotModel.amount})
             .then(() => alert('Successful for Updating Lot'));
           this.clearLotData();
-        }catch (err) {
+        } catch (err) {
           console.log(err.message);
           return this._lotModel;
         }
-      }else{
+      } else {
         return this.addLot();
       }
     }
@@ -278,9 +283,9 @@ export class ProductComponent {
       const pathFirebase = 'Lots/' + this._deleteLotKey;
       this.af.object(pathFirebase)
         .remove()
-        // .then(() => alert('Successful for deleting lot'));
+      // .then(() => alert('Successful for deleting lot'));
       return true;
-    }catch (err) {
+    } catch (err) {
       console.log(err.message);
       return false;
     }
@@ -293,15 +298,25 @@ export class ProductComponent {
   }
 
 
+  //   qenerateQRcode(lot: Lot): string {
+  //   this._lotModel = Object.assign({}, lot);
+  //   console.log(lot);
+  //   this._value = this._lotModel.qrCode;
+  //   this._value2 = this._lotModel.expiryDate;
+  //
+  //   console.log(this._value2);
+  //   return this._value;
+  // }
 
-  qenerateQRcode(lot: Lot): string {
+    qenerateQRcode(lot: Lot): Lot {
     this._lotModel = Object.assign({}, lot);
-    console.log(lot);
-    this._value = this._lotModel.qrCode;
-    this._value2 = this._lotModel.expiryDate;
-    console.log(this._value2 );
-    return this._value;
+
+
+      return this._lotModel
+
   }
+
+
 
   print(): boolean {
     let printContents, popupWin;
@@ -322,21 +337,34 @@ export class ProductComponent {
     popupWin.document.close();
     return true;
   }
+  createRange(startNum,amountNum){
+    var items: number[] = [];
+    var Max = startNum+amountNum;
+
+    for(let i = startNum; i < Max; i++){
+      let HexaNumber = i.toString(16);
+      items.push(HexaNumber);
+    }
+    return items;
+  }
+
 
   getCurrentDate(): string {
     this._datetime = this._currentDate.getFullYear() + '-';
     if (this._currentDate.getMonth() + 1 < 10) {
       this._datetime = this._datetime + '0' + (this._currentDate.getMonth() + 1) + '-';
-    }else {
+    } else {
       this._datetime = this._datetime + (this._currentDate.getMonth() + 1) + '-';
     }
     if (this._currentDate.getDate() < 10) {
       this._datetime = this._datetime + '0' + this._currentDate.getDate();
-    }else {
+    } else {
       this._datetime = this._datetime + this._currentDate.getDate();
     }
     return this._datetime;
   }
+
+
   // getter setter
 
 
@@ -469,4 +497,6 @@ export class ProductComponent {
   set keyofnewproduct(value: any) {
     this._keyofnewproduct = value;
   }
+
+
 }
