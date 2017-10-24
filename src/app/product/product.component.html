@@ -228,7 +228,8 @@
         <h4 class="modal-title custom_align" id="qrcodeHeading">QR Code</h4>
       </div>
       <div class="modal-body qrcode ">
-
+        <button type="button" class="btn btn-default" data-dismiss="modal" (click)="print()"><span class="glyphicon glyphicon-print"></span> Print QR Code</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
         <div  id="print-section">
         <!--your html stuff that you want to print-->
 
@@ -250,8 +251,7 @@
 
                </div>
                <div class="modal-footer ">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" (click)="print()"><span class="glyphicon glyphicon-print"></span> Print QR Code</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+
                   </div>
                 </div>
                 <!-- /.modal-content -->
