@@ -7,5 +7,5 @@ export class Lot {
   qrCode: string;
   amount: number;
   expiryDate: string;
-  StartAt: number;
+  
 }
