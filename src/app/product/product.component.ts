@@ -337,16 +337,17 @@ export class ProductComponent {
     popupWin.document.close();
     return true;
   }
-  createRange(startNum,amountNum){
-    var items: number[] = [];
-    var Max = startNum+amountNum;
+  createRange(amountNum){
+    var items: string[] = [];
+    var Max = amountNum;
 
-    for(let i = startNum; i < Max; i++){
+    for(let i = 1; i < Max; i++){
       let HexaNumber = i.toString(16);
       items.push(HexaNumber);
     }
     return items;
   }
+
 
 
   getCurrentDate(): string {

@@ -234,7 +234,7 @@
 
           <!-- -->
 
-        <div class="col-md-4" *ngFor="let  item of createRange(lotModel.StartAt,lotModel.amount)">
+        <div class="col-md-4" *ngFor="let  item of createRange(lotModel.amount)">
 
 
                 <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="lotModel.qrCode+','+item"></ngx-qrcode>
