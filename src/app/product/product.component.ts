@@ -327,11 +327,25 @@ export class ProductComponent {
       <html>
         <head>
           <title>Print tab</title>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+          <script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+          <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.js"></script>
           <style>
           //........Customized style.......
+          #col {
+
+          
+            }
+            .columns {
+          columns: 3;
+            }
+
           </style>
         </head>
-    <body onload="window.print();window.close()">${printContents}</body>
+    <body onload="window.print();window.close()">
+    <div class="columns">
+    ${printContents}</div>
+    </body>
       </html>`
     );
     popupWin.document.close();
@@ -347,7 +361,6 @@ export class ProductComponent {
     }
     return items;
   }
-
 
 
   getCurrentDate(): string {
