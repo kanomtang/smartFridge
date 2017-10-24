@@ -317,7 +317,6 @@ export class ProductComponent {
   }
 
 
-
   print(): boolean {
     let printContents, popupWin;
     printContents = document.getElementById('print-section').innerHTML;
@@ -351,7 +350,9 @@ export class ProductComponent {
     popupWin.document.close();
     return true;
   }
-  createRange(amountNum){
+
+
+  createRange(amountNum): string[]{
     var items: string[] = [];
     var Max = amountNum;
 
