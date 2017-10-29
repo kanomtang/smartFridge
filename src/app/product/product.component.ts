@@ -194,7 +194,32 @@ export class ProductComponent {
     return keyparam;
   }
 
-  addLot(): Lot {
+  // addLot(): Lot {
+  //   try {
+  //     this._num = Number(this._date.slice(8, 10));
+  //     this._datetime = this._num + '/';
+  //     this._num = Number(this._date.slice(5, 7));
+  //     this._datetime = this._datetime + this._num + '/';
+  //     this._num = Number(this._date.slice(0, 4));
+  //     this._datetime = this._datetime + this._num;
+  //     this._lotModel.expiryDate = this._datetime;
+  //     this._lots.push({
+  //       'productID': this._lotModel.productID,
+  //       'qrCode': this._lotModel.qrCode + this._datetime,
+  //       'expiryDate': this._lotModel.expiryDate,
+  //       'amount': this._lotModel.amount
+  //     })
+  //       .then(
+  //         () => alert('Successful for adding new lot')
+  //       );
+  //     this.clearLotData();
+  //     return this._lotModel;
+  //   } catch (err) {
+  //     console.log(err.message);
+  //     return null;
+  //   }
+  // }
+  addLot(): boolean {
     try {
       this._num = Number(this._date.slice(8, 10));
       this._datetime = this._num + '/';
@@ -213,14 +238,64 @@ export class ProductComponent {
           () => alert('Successful for adding new lot')
         );
       this.clearLotData();
-      return this._lotModel;
+      return true;
     } catch (err) {
       console.log(err.message);
-      return null;
+      return false;
     }
   }
 
-  updateLot(): Lot {
+  // updateLot(): Lot {
+  //   let isExist = false;
+  //   let lotKey = '';
+  //   let lotAmount = 0;
+  //   if (this.amountEmpty()) {
+  //     console.log("empty field");
+  //     alert("Please don't leave the field blank");
+  //     return null;
+  //   } else if (this.isNotPositiveAmount()) {
+  //     alert("Amount must be a positive number");
+  //     return null;
+  //   } else {
+  //     this._num = Number(this._date.slice(8, 10));
+  //     this._datetime = this._num + '/';
+  //     this._num = Number(this._date.slice(5, 7));
+  //     this._datetime = this._datetime + this._num + '/';
+  //     this._num = Number(this._date.slice(0, 4));
+  //     this._datetime = this._datetime + this._num;
+  //     this.subscription = this._lots.subscribe(lots => {
+  //       // items is an array
+  //       lots.forEach(lot => {
+  //         //console.log('Lot:', lot);
+  //         if (this._datetime == lot.expiryDate) {
+  //           isExist = true;
+  //           lotKey = lot.$key;
+  //           lotAmount = lot.amount + this._lotModel.amount;
+  //           console.log('key:', lotKey);
+  //         }
+  //       });
+  //     });
+  //     this.subscription.unsubscribe();
+  //
+  //     if (isExist) {
+  //       this._lotModel.amount = lotAmount;
+  //       try {
+  //         const pathFirebase = 'Lots/' + lotKey;
+  //         this.af.object(pathFirebase)
+  //           .update({'amount': this._lotModel.amount})
+  //           .then(() => alert('Successful for Updating Lot'));
+  //         this.clearLotData();
+  //       } catch (err) {
+  //         console.log(err.message);
+  //         return this._lotModel;
+  //       }
+  //     } else {
+  //       return this.addLot();
+  //     }
+  //   }
+  // }
+
+  updateLot(): boolean {
     let isExist = false;
     let lotKey = '';
     let lotAmount = 0;
@@ -260,12 +335,14 @@ export class ProductComponent {
             .update({'amount': this._lotModel.amount})
             .then(() => alert('Successful for Updating Lot'));
           this.clearLotData();
+          return true;
         } catch (err) {
           console.log(err.message);
-          return this._lotModel;
+          return true;
         }
       } else {
-        return this.addLot();
+        this.addLot();
+        return false;
       }
     }
   }
@@ -317,6 +394,7 @@ export class ProductComponent {
   }
 
 
+
   print(): boolean {
     let printContents, popupWin;
     printContents = document.getElementById('print-section').innerHTML;
@@ -350,9 +428,7 @@ export class ProductComponent {
     popupWin.document.close();
     return true;
   }
-
-
-  createRange(amountNum): string[]{
+  createRange(amountNum){
     var items: string[] = [];
     var Max = amountNum;
 

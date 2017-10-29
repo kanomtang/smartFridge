@@ -59,71 +59,117 @@ describe('ProductComponent', () => {
 
 
   });
-
-  it('should create', () => {
-    expect(true).toBeTruthy();
-  });
+  //
+  // it('should create', () => {
+  //   expect(true).toBeTruthy();
+  // });
   it('should get all lot list', () => {
 
     expect(component.getLotList()).not.toBeNull();
 
   });
-  it('should get all product list', () => {
 
-    expect(component.getList()).not.toBeNull();
 
-  });
-
-  
   it('should check the amount is not positive',() => {
 
-    let Mocklot = new Lot();
-    Mocklot.amount = -100 ;
-    component.lotModel = Mocklot;
-    expect(component.isNotPositiveAmount()).toBeLessThan(1);
+    // amount = 5
+    component.lotModel.amount = 5;
+    expect(component.isNotPositiveAmount()).toBe(false);
+
+    // amount = 0
+    component.lotModel.amount = 0;
+    expect(component.isNotPositiveAmount()).toBe(true);
+
+    // amount = -1
+    component.lotModel.amount = -1;
+    expect(component.isNotPositiveAmount()).toBe(true);
 
   });
 
   it('should add new lot', () => {
 
 
+    // Test case No.1 all input field the result should return undefine
+    let MockLot1 = new Lot();
+    MockLot1.expiryDate = '20/10/2020';
+    MockLot1.qrCode = 'Kitkat,25,';
+    MockLot1.amount = 100;
+    MockLot1.productID = '-KqnYplgBJ7HB9gAozYv';
 
-    component.lotModel.amount=100;
-    component.lotModel.qrCode = 'Kitkat,25,';
+    component.lotModel = MockLot1;
+    component.date = '2018-07-20';
+
+    let result1 =component.addLot();
+
+    // expect(result1.expiryDate).toBeUndefined();
+    // expect(result1.amount).toBeUndefined();
+    // expect(result1.qrCode).toBeUndefined();
+    // expect(result1.productID).toBeUndefined();
+    expect(result1).toBe(true);
+
+    // Test case No.2 missing amount field the result3 should return undefine
+    let MockLot2 = new Lot();
+    MockLot2.qrCode = 'Kitkat,25,';
+    MockLot2.productID = '-KqnYplgBJ7HB9gAozYv';
     component.date = '2018-07-20'
-    // component.lotModel = Mocklot;
+    component.lotModel = MockLot2;
+
+    let result2 =component.addLot();
+    expect(result2).toBe(false);
+
+    // Test case No.3 missing productID field the result3 should return undefine
+    let MockLot3 = new Lot();
+    MockLot3.amount = 100;
+    MockLot3.qrCode= 'Kitkat,25,';
+    MockLot3.expiryDate= '20/10/2020';
+    component.date = '2018-07-20'
+    component.lotModel = MockLot3;
+
+    let result3 =component.addLot();
+    expect(result3).toBe(false);
+
+    // Test case No.4 missing expirydate field the result3 should return undefine
+
+    let MockLot4 = new Lot();
+    MockLot3.amount = 100;
+    MockLot3.qrCode= 'Kitkat,25,';
+    MockLot3.productID= '-KqnYplgBJ7HB9gAozYv';
+    component.date = '2018-07-20'
+    component.lotModel = MockLot4;
+
+    let result4 =component.addLot();
+    expect(result4).toBe(false);
 
 
-    let result =component.addLot();
 
-    expect(result).toBeNull();
 
   });
 
 
-
-  it('should update lot', () => {
-    component.lotModel.amount=100;
-    component.lotModel.qrCode = 'Kitkat,25,';
-    component.date = '2018-07-20'
-
-    let result =component.updateLot();
-    expect(result).toBeNull();
-
-
-  });
+  //
+  // it('should update lot', () => {
+  //   component.lotModel.amount=100;
+  //   component.lotModel.qrCode = 'Kitkat,25,';
+  //   component.lotModel.productID= '-KqnYplgBJ7HB9gAozYv';
+  //   //component.date = '2018-07-20';
+  //   component.date = '2017-10-03';
+  //   let result =component.updateLot();
+  //   expect(result).toBe(false);
+  //
+  //
+  // });
 
   it('should create the qr code', () =>{
     let Lotparam = new Lot();
     Lotparam.productID = '-KqnYplgBJ7HB9gAozYv';
-    Lotparam.expiryDate = '23/9/2017';
+    Lotparam.expiryDate = '20/7/2018';
     Lotparam.amount= 100 ;
 
     let dummy = component.qenerateQRcode(Lotparam);
 
     expect(dummy.amount).toBe(100);
     expect(dummy.productID).toBe('-KqnYplgBJ7HB9gAozYv');
-    expect(dummy.expiryDate).toBe('23/9/2017');
+    expect(dummy.expiryDate).toBe('20/7/2018');
     //expect(component.qenerateQRcode(Lotparam)).toBe('Kitkat,25,23/9/2017');
   });
 
@@ -148,6 +194,10 @@ describe('ProductComponent', () => {
     component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K');
     component.deleteLotKey = '-KujRF6zr-3AtpNnwn0K' ;
     expect(component.keyToDeleteLot('-KujRF6zr-3AtpNnwn0K')).toBe(component.deleteLotKey);
+
+
+    component.deleteLotKey = '' ;
+    expect(component.keyToDeleteLot('')).toBe(component.deleteLotKey);
   })
 
   it('should create array range',() =>{
