@@ -57,7 +57,7 @@ export class ProductComponent {
       const pathFirebase = 'ProductInfo/' + this._deleteKey;
       this.af.object(pathFirebase)
         .remove()
-      // .then(() => alert('Successful for deleting product'));
+        .then(() => alert('Successful for deleting product'));
       return true;
     } catch (err) {
       console.log(err.message);
@@ -360,7 +360,7 @@ export class ProductComponent {
       const pathFirebase = 'Lots/' + this._deleteLotKey;
       this.af.object(pathFirebase)
         .remove()
-      // .then(() => alert('Successful for deleting lot'));
+       .then(() => alert('Successful for deleting lot'));
       return true;
     } catch (err) {
       console.log(err.message);

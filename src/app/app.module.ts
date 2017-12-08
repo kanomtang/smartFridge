@@ -15,7 +15,8 @@ import { AuthGuardService } from './providers/auth-guard.service';
 import { UserComponentComponent } from './user-component/user-component.component';
 import { ProductComponent } from './product/product.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
-
+import {ChartComponent} from './chart/chart.component';
+import {Ng2GoogleChartModule} from 'ng2-googlechart';
 export const firebaseConfig = {
   apiKey: 'AIzaSyCFXny8pflQwLu9AyQu8ve9xI6qA9KR7PM',
   authDomain: 'iotapplication-7cf10.firebaseapp.com',
@@ -39,7 +40,8 @@ const routes: Routes = [
     HomePageComponent,
     RegisterPageComponent,
     UserComponentComponent,
-    ProductComponent
+    ProductComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +51,8 @@ const routes: Routes = [
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgxQRCodeModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    Ng2GoogleChartModule
   ],
   providers: [AuthService, AuthGuardService],
   bootstrap: [AppComponent]

@@ -1,0 +1,43 @@
+
+  <!--<div class="chart"-->
+       <!--chart-->
+       <!--[data]="DataArr"-->
+       <!--[options]="options"-->
+       <!--[labels]="LabelArr"-->
+       <!--[columnTypes]="columnTypes"-->
+       <!--[chartType]="chartType">-->
+  <!--</div>-->
+  <tr>
+    <td>
+      <button (click)="ConsumptionRate()">Consumption Rate</button>
+    </td>
+    <td>
+      <button (click)="Shelflife()">Shelf Life</button>
+    </td>
+  </tr>
+
+
+  <div *ngIf="topicValue== '1'">
+    <div class="chart"
+         chart
+         [data]="DataArr"
+         [options]="options"
+         [labels]="LabelArr"
+         [columnTypes]="columnTypes"
+         [chartType]="chartType">
+    </div>
+  </div>
+
+  <div *ngIf="topicValue== '2'">
+    <div class="chart"
+    chart
+    [data]="DataArr"
+    [options]="options"
+    [labels]="LabelArr"
+    [columnTypes]="columnTypes"
+    [chartType]="chartType">
+    </div>
+  </div>
+
+
+
