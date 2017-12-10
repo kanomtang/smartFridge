@@ -47,7 +47,7 @@ export class ChartComponent {
   topicValue =0 ;
   DataArr: UsageItem[] = [];
   LabelArr: UsageItem[] = [];
-  Mockarr:any[] = [];
+  Usagelist:any[] = [];
   UsageItem: FirebaseListObservable<any[]>;
 
 
@@ -57,7 +57,7 @@ export class ChartComponent {
 
     this.UsageItem = af.list('/Usage');
     this.UsageItem.subscribe(snapshot => {
-      this.Mockarr = snapshot;
+      this.Usagelist = snapshot;
     })
 
 
@@ -68,29 +68,29 @@ export class ChartComponent {
   }
 
   getList(): any[] {
-    return this.Mockarr;
+    return this.Usagelist;
   }
   extractValues(): UsageItem[] {
     let pk = [];
     let iniItem = new UsageItem();
     iniItem.AmountofUsageItem = 1;
-    iniItem.itemName = this.Mockarr[0].name;
-    iniItem.itemCheckin = this.Mockarr[0].Checkin;
-    iniItem.itemCheckout = this.Mockarr[0].Checkout;
+    iniItem.itemName = this.Usagelist[0].name;
+    iniItem.itemCheckin = this.Usagelist[0].Checkin;
+    iniItem.itemCheckout = this.Usagelist[0].Checkout;
     let newdate = new Date(iniItem.itemCheckout);
     let newdate1 = new Date(iniItem.itemCheckin);
     iniItem.Shelflife = Number( Math.abs((newdate1.getTime() - newdate.getTime()) / 60000));
     pk.push(iniItem);
     let checkDup = false;
-    for (let i = 1; i < this.Mockarr.length - 1; i++) {
+    for (let i = 1; i < this.Usagelist.length - 1; i++) {
 
 
       for (let k = 0; k < pk.length; k++) {
-        if (pk[k].itemName == this.Mockarr[i].name) {
-          if (pk[k].itemName == this.Mockarr[i].name) {
+        if (pk[k].itemName == this.Usagelist[i].name) {
+          if (pk[k].itemName == this.Usagelist[i].name) {
             pk[k].AmountofUsageItem += 1;
-            let newdate4 = new Date(this.Mockarr[i].Checkout);
-            let newdate5 = new Date(this.Mockarr[i].Checkin);
+            let newdate4 = new Date(this.Usagelist[i].Checkout);
+            let newdate5 = new Date(this.Usagelist[i].Checkin);
             pk[k].Shelflife = Math.abs((newdate4.getTime() - newdate5.getTime()) / 60000);
             pk[k].Shelflife += 1;
             checkDup = true;
@@ -104,11 +104,11 @@ export class ChartComponent {
 
         let newItem = new UsageItem();
         newItem.AmountofUsageItem = 1;
-        newItem.itemName = this.Mockarr[i].name;
-        newItem.itemCheckin = this.Mockarr[i].Checkin;
-        newItem.itemCheckout = this.Mockarr[i].Checkout;
-        let newdate2 = new Date(this.Mockarr[i].Checkout);
-        let newdate3 = new Date(this.Mockarr[i].Checkin);
+        newItem.itemName = this.Usagelist[i].name;
+        newItem.itemCheckin = this.Usagelist[i].Checkin;
+        newItem.itemCheckout = this.Usagelist[i].Checkout;
+        let newdate2 = new Date(this.Usagelist[i].Checkout);
+        let newdate3 = new Date(this.Usagelist[i].Checkin);
         newItem.Shelflife = Math.abs((newdate2.getTime() - newdate3.getTime()) / 60000);
         pk.push(newItem);
       }

@@ -17,7 +17,7 @@ export const firebaseConfig = {
   messagingSenderId: '33890290341'
 };
 
-const fixtureTodos = [
+const fixtureNames = [
   { 'name': 'Pepo' },
   { 'name': 'Coke' },
   { 'name': 'Miranda' },
@@ -25,11 +25,11 @@ const fixtureTodos = [
   { 'name': 'Custard' }
 ];
 const angularFireDatabaseStub = { list: () => {} };
-const mockTodos$ = Observable.of(fixtureTodos);
+const mockNames$ = Observable.of(fixtureNames);
 
 describe('TodosService', () => {
   beforeEach(() => {
-    spyOn(angularFireDatabaseStub, 'list').and.returnValue(mockTodos$);
+    spyOn(angularFireDatabaseStub, 'list').and.returnValue(mockNames$);
 
     TestBed.configureTestingModule({
       providers: [
@@ -42,7 +42,7 @@ describe('TodosService', () => {
   it('#getAll', inject([ChartComponent], (service: ChartComponent) => {
     const items$ = service.UsageItem;
     items$.subscribe(item => {
-      expect(item[0].name).toEqual(fixtureTodos[0].name);
+      expect(item[0].name).toEqual(fixtureNames[0].name);
 
       
     });
