@@ -14,8 +14,6 @@ export class ChartComponent {
 
 
 
-  data =[];
-  labels = [];
 
 
   columnTypes = [{

@@ -21,7 +21,7 @@ const fixtureNames = [
   { 'name': 'Pepo' },
   { 'name': 'Coke' },
   { 'name': 'Miranda' },
- 
+
   { 'name': 'Custard' }
 ];
 const angularFireDatabaseStub = { list: () => {} };
@@ -44,9 +44,9 @@ describe('TodosService', () => {
     items$.subscribe(item => {
       expect(item[0].name).toEqual(fixtureNames[0].name);
 
-      
+
     });
-   
+
   }));
 
   it('#ExtractValues', inject([ChartComponent],(service:ChartComponent)=>{
@@ -55,7 +55,7 @@ describe('TodosService', () => {
   	expect(resultArr[1].itemName).toBe('Coke');
   	expect(resultArr[2].itemName).toBe('Miranda');
   	console.log(resultArr[0]);
-  })) 
+  }))
 
   it('#assign amount of usage array', inject([ChartComponent], (service:ChartComponent) =>{
   		let resultArr = service.assignDataAmount();
@@ -67,7 +67,7 @@ describe('TodosService', () => {
 
   it('#assign lebel of usage array', inject([ChartComponent], (service:ChartComponent) =>{
   		let resultArr = service.assignLabel();
-  		
+
   		expect(resultArr[0]).toBe('Pepo');
   		expect(resultArr[1]).toBe('Coke');
   		expect(resultArr[2]).toBe('Miranda');
@@ -75,7 +75,7 @@ describe('TodosService', () => {
 
   //   it('#assign shelf life of usage array', inject([ChartComponent], (service:ChartComponent) =>{
   // 		let resultArr = service.assignDataShelflife();
-  		
+
   // 		// Because every element in this array must be over 0
   // 		expect(resultArr[0]).toBeGreaterThan(0);
   // 		expect(resultArr[1]).toBeGreaterThan(0);
@@ -85,17 +85,17 @@ describe('TodosService', () => {
 
     it('#Consumption rate', inject([ChartComponent], (service:ChartComponent) =>{
   		let result = service.ConsumptionRate();
-  		
+
   		// Because every element in this array must be over 0
   		expect(result).toBe(true);
-  		
+
   }))
        it('#Shelife rate', inject([ChartComponent], (service:ChartComponent) =>{
   		let result = service.Shelflife();
-  		
+
   		// Because every element in this array must be over 0
   		expect(result).toBe(true);
-  		
+
   }))
 
 });

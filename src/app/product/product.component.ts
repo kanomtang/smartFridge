@@ -10,10 +10,9 @@ import {Subscription} from 'rxjs/Subscription';
   styleUrls: ['./product.component.css']
 })
 export class ProductComponent {
-  @Input() private _Productanditem: ProductItem;
+
   private _elementType: 'url' | 'canvas' | 'img' = 'url';
-  private _value = 'Turtle';
-  private _value2 = '---';
+
   private _items: FirebaseListObservable<any[]>;
   private _lots: FirebaseListObservable<any[]>;
   private _model = new ProductItem();
@@ -25,7 +24,7 @@ export class ProductComponent {
   private _lotModel = new Lot();
   private _date: string;
   private _num: number;
-  private _keyofnewproduct: any;
+
   private subscription: Subscription;
 
 
@@ -459,13 +458,7 @@ export class ProductComponent {
   // getter setter
 
 
-  get Productanditem(): ProductItem {
-    return this._Productanditem;
-  }
 
-  set Productanditem(value: ProductItem) {
-    this._Productanditem = value;
-  }
 
   get elementType() {
     return this._elementType;
@@ -473,22 +466,6 @@ export class ProductComponent {
 
   set elementType(value) {
     this._elementType = value;
-  }
-
-  get value(): string {
-    return this._value;
-  }
-
-  set value(value: string) {
-    this._value = value;
-  }
-
-  get value2(): string {
-    return this._value;
-  }
-
-  set value2(value: string) {
-    this._value = value;
   }
 
 
@@ -581,13 +558,6 @@ export class ProductComponent {
   }
 
 
-  get keyofnewproduct(): any {
-    return this._keyofnewproduct;
-  }
-
-  set keyofnewproduct(value: any) {
-    this._keyofnewproduct = value;
-  }
 
 
 }
