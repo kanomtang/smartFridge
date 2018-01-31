@@ -99,7 +99,7 @@ export class ProductComponent {
 
   addItem(): ProductItem {
     //validate the correctness before adding item
-    let notExist = false;
+    let notExist = true;
     if (this.isEmpty()) {
       console.log("empty field");
       alert("Please don't leave the field blank");
@@ -108,8 +108,10 @@ export class ProductComponent {
       alert("Price must be a positive number");
       return null;
     } else {
+
       this.subscription = this._items.subscribe(items => {
         // items is an array
+
         items.forEach(item => {
           //console.log('Item:', item);
           if (this._model.ProductName == item.ProductName) {
@@ -119,11 +121,13 @@ export class ProductComponent {
           }
         });
       });
+
       this.subscription.unsubscribe();
 
       if (notExist) {
         //   อาจจะรับมาเป็น Product type ในหน้า html คงเป็น item  จสกนนั้นใน method ก็เขียนว่า 'CreatedDate' : productparam.CreatedDate
         try {
+
           this._datetime = this._currentDate.getDate() + '/'
             + (this._currentDate.getMonth() + 1 ) + '/'
             + this._currentDate.getFullYear() + ' @ '
@@ -193,31 +197,7 @@ export class ProductComponent {
     return keyparam;
   }
 
-  // addLot(): Lot {
-  //   try {
-  //     this._num = Number(this._date.slice(8, 10));
-  //     this._datetime = this._num + '/';
-  //     this._num = Number(this._date.slice(5, 7));
-  //     this._datetime = this._datetime + this._num + '/';
-  //     this._num = Number(this._date.slice(0, 4));
-  //     this._datetime = this._datetime + this._num;
-  //     this._lotModel.expiryDate = this._datetime;
-  //     this._lots.push({
-  //       'productID': this._lotModel.productID,
-  //       'qrCode': this._lotModel.qrCode + this._datetime,
-  //       'expiryDate': this._lotModel.expiryDate,
-  //       'amount': this._lotModel.amount
-  //     })
-  //       .then(
-  //         () => alert('Successful for adding new lot')
-  //       );
-  //     this.clearLotData();
-  //     return this._lotModel;
-  //   } catch (err) {
-  //     console.log(err.message);
-  //     return null;
-  //   }
-  // }
+
   addLot(): boolean {
     try {
       this._num = Number(this._date.slice(8, 10));
@@ -244,55 +224,6 @@ export class ProductComponent {
     }
   }
 
-  // updateLot(): Lot {
-  //   let isExist = false;
-  //   let lotKey = '';
-  //   let lotAmount = 0;
-  //   if (this.amountEmpty()) {
-  //     console.log("empty field");
-  //     alert("Please don't leave the field blank");
-  //     return null;
-  //   } else if (this.isNotPositiveAmount()) {
-  //     alert("Amount must be a positive number");
-  //     return null;
-  //   } else {
-  //     this._num = Number(this._date.slice(8, 10));
-  //     this._datetime = this._num + '/';
-  //     this._num = Number(this._date.slice(5, 7));
-  //     this._datetime = this._datetime + this._num + '/';
-  //     this._num = Number(this._date.slice(0, 4));
-  //     this._datetime = this._datetime + this._num;
-  //     this.subscription = this._lots.subscribe(lots => {
-  //       // items is an array
-  //       lots.forEach(lot => {
-  //         //console.log('Lot:', lot);
-  //         if (this._datetime == lot.expiryDate) {
-  //           isExist = true;
-  //           lotKey = lot.$key;
-  //           lotAmount = lot.amount + this._lotModel.amount;
-  //           console.log('key:', lotKey);
-  //         }
-  //       });
-  //     });
-  //     this.subscription.unsubscribe();
-  //
-  //     if (isExist) {
-  //       this._lotModel.amount = lotAmount;
-  //       try {
-  //         const pathFirebase = 'Lots/' + lotKey;
-  //         this.af.object(pathFirebase)
-  //           .update({'amount': this._lotModel.amount})
-  //           .then(() => alert('Successful for Updating Lot'));
-  //         this.clearLotData();
-  //       } catch (err) {
-  //         console.log(err.message);
-  //         return this._lotModel;
-  //       }
-  //     } else {
-  //       return this.addLot();
-  //     }
-  //   }
-  // }
 
   updateLot(): boolean {
     let isExist = false;
@@ -359,7 +290,7 @@ export class ProductComponent {
       const pathFirebase = 'Lots/' + this._deleteLotKey;
       this.af.object(pathFirebase)
         .remove()
-       .then(() => alert('Successful for deleting lot'));
+        .then(() => alert('Successful for deleting lot'));
       return true;
     } catch (err) {
       console.log(err.message);
@@ -384,11 +315,11 @@ export class ProductComponent {
   //   return this._value;
   // }
 
-    qenerateQRcode(lot: Lot): Lot {
+  qenerateQRcode(lot: Lot): Lot {
     this._lotModel = Object.assign({}, lot);
 
 
-      return this._lotModel
+    return this._lotModel
 
   }
 
