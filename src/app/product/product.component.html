@@ -238,29 +238,16 @@
         <div class="col-md-4" *ngFor="let  item of createRange(lotModel.amount)">
 
 
-                <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="lotModel.qrCode+','+item"></ngx-qrcode>
+                <ngx-qrcode  [qrc-value]="lotModel.qrCode+','+item" [qrc-version]=5 [qrc-correction-level]="'H'"></ngx-qrcode>
 
-<div style="padding-left: 0.65cm">
+<div style="font-size: 26px">
                {{lotModel.expiryDate+','+item}}</div>
 
         </div>
 
 
 
-          <!--
-                    <tbody *ngFor="let  item of createRange(lotModel.StartAt,lotModel.amount)" >
-                <!--
-                                       <tr>
-                                         <td>  <ngx-qrcode [qrc-element-type]="elementType" [qrc-value]="lotModel.qrCode+','+item"></ngx-qrcode> </td>
-                                       </tr>
-                                       <tr>
-                                         <td> {{lotModel.expiryDate+','+item}}</td>
-                                       </tr>
 
-
-                   </tbody>
-
-          -->
                   </div>
 
                </div>
